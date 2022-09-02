@@ -31,6 +31,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordTextField.delegate = self
     }
     
+    // закрытие textfield'a при нажатии return/ввод на клавиатуре
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.emailTextField.resignFirstResponder()
         self.passwordTextField.resignFirstResponder()
@@ -48,7 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
 // textfield с нижним подчеркиванием
 extension UITextField {
-    func underlined(color: UIColor){
+    func underlined(color: UIColor) {
         let border = CALayer()
         let width = CGFloat(1.0)
         border.borderColor = color.cgColor
