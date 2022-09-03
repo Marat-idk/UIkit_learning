@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
         signInBtn.layer.cornerRadius = 7.0
         
         emailTextField.underlined(color: .lightGray)
@@ -42,6 +41,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "toSecond", sender: nil)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    
+    @IBAction func unwindSegueToMainScreen(_ seg: UIStoryboardSegue) {
         
     }
 
