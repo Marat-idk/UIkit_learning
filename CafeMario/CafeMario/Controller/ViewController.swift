@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  CafeMario
 //
-//  Created by Maxim Raskevich on 01.09.2022.
+//  Created by Marat on 01.09.2022.
 //
 
 import UIKit
@@ -21,9 +21,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         emailTextField.underlined(color: .lightGray)
         passwordTextField.underlined(color: .lightGray)
         
-        emailTextField.placeholder = "Enter email"
-        emailTextField.keyboardType = .emailAddress
-        passwordTextField.placeholder = "Enter password"
+        emailTextField.textFieldSettings(placeHolder: "Enter email", keyboardType: .emailAddress)
+        passwordTextField.textFieldSettings(placeHolder: "Enter password")
         passwordTextField.isSecureTextEntry = true
         
         emailTextField.delegate = self

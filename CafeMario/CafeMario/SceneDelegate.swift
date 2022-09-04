@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  CafeMario
 //
-//  Created by Maxim Raskevich on 01.09.2022.
+//  Created by Marat on 01.09.2022.
 //
 
 import UIKit
