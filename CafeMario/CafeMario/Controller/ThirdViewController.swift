@@ -9,6 +9,7 @@ import UIKit
 
 class ThirdViewController: UIViewController {
     @IBOutlet weak var totalBtn: UIButton!
+    var totalPrice = 10000.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,7 @@ class ThirdViewController: UIViewController {
         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 30, weight: .bold)]
         self.navigationController?.navigationBar.titleTextAttributes = attributes
         
+        totalBtn.titleLabel?.text = "Итого: \(totalPrice) руб."
         totalBtn.layer.cornerRadius = 7.0
     }
     
