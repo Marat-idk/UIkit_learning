@@ -67,11 +67,29 @@ class ViewController: UIViewController {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.placeholder = "Введите пароль"
-        tf.clearButtonMode = .whileEditing
+        tf.autocorrectionType = .no
         tf.underlined(color: .lightGray)
         tf.isSecureTextEntry.toggle()
+        tf.enablePasswordToggle()
         return tf
     }()
+    
+    let faceidLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Вход по Face ID"
+        label.textColor = .darkGray
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 16)
+        return label
+    }()
+    
+    let faceidSwitch: UISwitch = {
+        let sw = UISwitch()
+        sw.translatesAutoresizingMaskIntoConstraints = false
+        return sw
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -85,14 +103,20 @@ class ViewController: UIViewController {
         self.view.addSubview(emailTextField)
         self.view.addSubview(passwordLabel)
         self.view.addSubview(passwordTextField)
+        self.view.addSubview(faceidLabel)
+        self.view.addSubview(faceidSwitch)
         
         setupTitleLable()
         setupSignInLabel()
-        setupEmailLabel()
-        setupPasswordLabel()
         
-        setupTextField(element: emailTextField, equalTo: emailLabel, topConst: 10, widtdMultiplier: 0.75, heightConst: 40)
-        setupTextField(element: passwordTextField, equalTo: passwordLabel, topConst: 10, widtdMultiplier: 0.75, heightConst: 40)
+        setupLabel(element: emailLabel, equalTo: signinLabel, topConst: 15, widthConst: 45, heighConst: 25)
+        setupLabel(element: passwordLabel, equalTo: emailLabel, topConst: 60, widthConst: 80, heighConst: 25)
+        
+        setupTextField(element: emailTextField, equalTo: emailLabel, topConst: 0, widtdMultiplier: 0.75, heightConst: 40)
+        setupTextField(element: passwordTextField, equalTo: passwordLabel, topConst: 0, widtdMultiplier: 0.75, heightConst: 40)
+        
+        setupSwitch()
+        setupFaceIDLabel()
         
     }
     
@@ -104,25 +128,18 @@ class ViewController: UIViewController {
     }
     
     func setupSignInLabel() {
-        signinLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
+        signinLabel.leftAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: view.leftAnchor, multiplier: 6).isActive = true
+        //signinLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
         signinLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 70).isActive = true
         signinLabel.widthAnchor.constraint(equalToConstant: 95).isActive = true
         signinLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    func setupEmailLabel() {
-        emailLabel.leftAnchor.constraint(equalTo: signinLabel.leftAnchor).isActive = true
-        emailLabel.topAnchor.constraint(equalTo: signinLabel.bottomAnchor, constant: 15).isActive = true
-        emailLabel.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        emailLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        
-    }
-    
-    func setupPasswordLabel() {
-        passwordLabel.leftAnchor.constraint(equalTo: emailLabel.leftAnchor).isActive = true
-        passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
-        passwordLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        passwordLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    func setupLabel(element: UIView, equalTo someView: UIView, topConst: CGFloat, widthConst: CGFloat, heighConst: CGFloat) {
+        element.leftAnchor.constraint(equalTo: someView.leftAnchor).isActive = true
+        element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
+        element.widthAnchor.constraint(equalToConstant: widthConst).isActive = true
+        element.heightAnchor.constraint(equalToConstant: heighConst).isActive = true
     }
     
     func setupTextField(element: UIView, equalTo someView: UIView, topConst: CGFloat, widtdMultiplier: CGFloat, heightConst: CGFloat) {
@@ -130,6 +147,18 @@ class ViewController: UIViewController {
         element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
         element.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widtdMultiplier).isActive = true
         element.heightAnchor.constraint(equalToConstant: heightConst).isActive = true
+    }
+    
+    func setupSwitch() {
+        faceidSwitch.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -65).isActive = true
+        faceidSwitch.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+    }
+    
+    func setupFaceIDLabel() {
+        faceidLabel.rightAnchor.constraint(equalTo: faceidSwitch.leftAnchor, constant: -10).isActive = true
+        faceidLabel.topAnchor.constraint(equalTo: faceidSwitch.topAnchor, constant: 3).isActive = true
+        faceidLabel.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        faceidLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     }
 }
 

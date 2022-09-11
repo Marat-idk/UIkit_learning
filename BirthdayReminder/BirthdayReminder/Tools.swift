@@ -40,26 +40,39 @@ extension UITextField {
 
         self.inputAccessoryView = doneToolbar
     }
-//    func textFieldSettings(placeHolder: String, keyboardType: UIKeyboardType = .default, color: UIColor = .lightGray) {
-//        self.underlined(color: color)
-//        self.placeholder = placeHolder
-//        self.keyboardType = keyboardType
-//    }
 }
 
 extension UITextField {
-    internal func addBottomBorder(height: CGFloat = 1.0, color: UIColor = .black) {
-        let borderView = UIView()
-        borderView.backgroundColor = color
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(borderView)
+    // добавление иконки глаза
+    fileprivate func setPasswordToggleImage(_ button: UIButton) {
+        if isSecureTextEntry {
+            button.setImage(UIImage(named: "eye closed"), for: .normal)
+        } else {
+            button.setImage(UIImage(named: "eye opened"), for: .normal)
+
+        }
+    }
+    func enablePasswordToggle(){
+        let button = UIButton(type: .custom)
+        setPasswordToggleImage(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(self.togglePasswordView), for: .touchUpInside)
+        self.rightView = button
+        self.rightViewMode = .always
+        self.addSubview(button)
+        
         NSLayoutConstraint.activate(
             [
-                borderView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                borderView.trailingAnchor.constraint(equalTo: trailingAnchor),
-                borderView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                borderView.heightAnchor.constraint(equalToConstant: height)
+                button.rightAnchor.constraint(equalTo: self.rightAnchor),
+                button.topAnchor.constraint(equalTo: self.topAnchor),
+                button.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                button.widthAnchor.constraint(equalToConstant: 25),
+                button.heightAnchor.constraint(equalToConstant: 25)
             ]
         )
+    }
+    @objc func togglePasswordView(_ sender: Any) {
+        self.isSecureTextEntry.toggle()
+        setPasswordToggleImage(sender as! UIButton)
     }
 }
