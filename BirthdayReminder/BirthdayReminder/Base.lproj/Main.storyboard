@@ -19,6 +19,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Mak-L1-oZf"/>
+                    <connections>
+                        <segue destination="p7j-mc-EvP" kind="show" identifier="toSecondVC" id="llv-FQ-33h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -41,6 +44,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iS0-WY-FrM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="28.985507246376812" y="51.5625"/>
+        </scene>
+        <!--Second View Controller-->
+        <scene sceneID="bR9-04-bcU">
+            <objects>
+                <viewController id="p7j-mc-EvP" customClass="SecondViewController" customModule="BirthdayReminder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9P9-dw-byM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="dR2-cL-vs0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZEM-HQ-hJ1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Rc-qa-ywf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1757" y="52"/>
         </scene>
     </scenes>
     <resources>

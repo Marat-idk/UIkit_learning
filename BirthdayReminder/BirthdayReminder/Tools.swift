@@ -63,7 +63,7 @@ extension UITextField {
         
         NSLayoutConstraint.activate(
             [
-                button.rightAnchor.constraint(equalTo: self.rightAnchor),
+                button.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 button.topAnchor.constraint(equalTo: self.topAnchor),
                 button.bottomAnchor.constraint(equalTo: self.bottomAnchor),
                 button.widthAnchor.constraint(equalToConstant: 25),

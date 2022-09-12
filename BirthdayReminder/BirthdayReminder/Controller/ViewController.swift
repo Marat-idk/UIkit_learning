@@ -37,7 +37,6 @@ class ViewController: UIViewController {
         label.textColor = UIColor(red: 140/255, green: 161/255, blue: 206/255, alpha: 1)
         label.textAlignment = .left
         label.font = .boldSystemFont(ofSize: 16)
-        //label.backgroundColor = .red
         return label
     }()
     
@@ -90,6 +89,18 @@ class ViewController: UIViewController {
         return sw
     }()
     
+    let signinButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Войти", for: .normal)
+        button.setTitleColor(.systemGray5, for: .highlighted)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.backgroundColor = UIColor(red: 175/255, green: 199/255, blue: 247/255, alpha: 1)
+        button.layer.cornerRadius = 7.0
+        button.addTarget(self, action: #selector(toSecondViewController(_:)), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -105,6 +116,7 @@ class ViewController: UIViewController {
         self.view.addSubview(passwordTextField)
         self.view.addSubview(faceidLabel)
         self.view.addSubview(faceidSwitch)
+        self.view.addSubview(signinButton)
         
         setupTitleLable()
         setupSignInLabel()
@@ -117,6 +129,7 @@ class ViewController: UIViewController {
         
         setupSwitch()
         setupFaceIDLabel()
+        setupSignInButton()
         
     }
     
@@ -128,7 +141,7 @@ class ViewController: UIViewController {
     }
     
     func setupSignInLabel() {
-        signinLabel.leftAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: view.leftAnchor, multiplier: 6).isActive = true
+        signinLabel.leadingAnchor.constraint(greaterThanOrEqualToSystemSpacingAfter: view.leadingAnchor, multiplier: 6).isActive = true
         //signinLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
         signinLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 70).isActive = true
         signinLabel.widthAnchor.constraint(equalToConstant: 95).isActive = true
@@ -136,29 +149,44 @@ class ViewController: UIViewController {
     }
     
     func setupLabel(element: UIView, equalTo someView: UIView, topConst: CGFloat, widthConst: CGFloat, heighConst: CGFloat) {
-        element.leftAnchor.constraint(equalTo: someView.leftAnchor).isActive = true
+        element.leadingAnchor.constraint(equalTo: someView.leadingAnchor).isActive = true
         element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
         element.widthAnchor.constraint(equalToConstant: widthConst).isActive = true
         element.heightAnchor.constraint(equalToConstant: heighConst).isActive = true
     }
     
     func setupTextField(element: UIView, equalTo someView: UIView, topConst: CGFloat, widtdMultiplier: CGFloat, heightConst: CGFloat) {
-        element.leftAnchor.constraint(equalTo: someView.leftAnchor).isActive = true
+        element.leadingAnchor.constraint(equalTo: someView.leadingAnchor).isActive = true
         element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
         element.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widtdMultiplier).isActive = true
         element.heightAnchor.constraint(equalToConstant: heightConst).isActive = true
     }
     
     func setupSwitch() {
-        faceidSwitch.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -65).isActive = true
+        faceidSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -65).isActive = true
         faceidSwitch.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
     }
     
     func setupFaceIDLabel() {
-        faceidLabel.rightAnchor.constraint(equalTo: faceidSwitch.leftAnchor, constant: -10).isActive = true
+        faceidLabel.trailingAnchor.constraint(equalTo: faceidSwitch.leadingAnchor, constant: -10).isActive = true
         faceidLabel.topAnchor.constraint(equalTo: faceidSwitch.topAnchor, constant: 3).isActive = true
         faceidLabel.widthAnchor.constraint(equalToConstant: 130).isActive = true
         faceidLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    }
+    
+    func setupSignInButton() {
+        signinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        signinButton.topAnchor.constraint(equalTo: faceidLabel.bottomAnchor, constant: 50).isActive = true
+        signinButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75).isActive = true
+        signinButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    @objc func toSecondViewController(_ sender: UIButton) {
+        performSegue(withIdentifier: "toSecondVC", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        /* code */
     }
 }
 
