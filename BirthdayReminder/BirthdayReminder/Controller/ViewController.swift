@@ -121,11 +121,11 @@ class ViewController: UIViewController {
         setupTitleLable()
         setupSignInLabel()
         
-        setupLabel(element: emailLabel, equalTo: signinLabel, topConst: 15, widthConst: 45, heighConst: 25)
-        setupLabel(element: passwordLabel, equalTo: emailLabel, topConst: 60, widthConst: 80, heighConst: 25)
+        setupAuthentication(element: emailLabel, equalTo: signinLabel, topConst: 15, heightConst: 25, widthConst: 45)
+        setupAuthentication(element: passwordLabel, equalTo: emailLabel, topConst: 60, heightConst: 25, widthConst: 80)
         
-        setupTextField(element: emailTextField, equalTo: emailLabel, topConst: 0, widtdMultiplier: 0.75, heightConst: 40)
-        setupTextField(element: passwordTextField, equalTo: passwordLabel, topConst: 0, widtdMultiplier: 0.75, heightConst: 40)
+        setupAuthentication(element: emailTextField, equalTo: emailLabel, topConst: 0, heightConst: 40, widthConst: nil, widtdMultiplier: 0.75)
+        setupAuthentication(element: passwordTextField, equalTo: passwordLabel, topConst: 0, heightConst: 40, widthConst: nil, widtdMultiplier: 0.75)
         
         setupSwitch()
         setupFaceIDLabel()
@@ -148,18 +148,15 @@ class ViewController: UIViewController {
         signinLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    func setupLabel(element: UIView, equalTo someView: UIView, topConst: CGFloat, widthConst: CGFloat, heighConst: CGFloat) {
+    func setupAuthentication(element: UIView, equalTo someView: UIView, topConst: CGFloat, heightConst: CGFloat, widthConst: CGFloat? = nil, widtdMultiplier: CGFloat? = nil) {
         element.leadingAnchor.constraint(equalTo: someView.leadingAnchor).isActive = true
         element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
-        element.widthAnchor.constraint(equalToConstant: widthConst).isActive = true
-        element.heightAnchor.constraint(equalToConstant: heighConst).isActive = true
-    }
-    
-    func setupTextField(element: UIView, equalTo someView: UIView, topConst: CGFloat, widtdMultiplier: CGFloat, heightConst: CGFloat) {
-        element.leadingAnchor.constraint(equalTo: someView.leadingAnchor).isActive = true
-        element.topAnchor.constraint(equalTo: someView.bottomAnchor, constant: topConst).isActive = true
-        element.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: widtdMultiplier).isActive = true
         element.heightAnchor.constraint(equalToConstant: heightConst).isActive = true
+        if let multi = widtdMultiplier {
+            element.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multi).isActive = true
+        } else if let widthConst = widthConst {
+            element.widthAnchor.constraint(equalToConstant: widthConst).isActive = true
+        }
     }
     
     func setupSwitch() {

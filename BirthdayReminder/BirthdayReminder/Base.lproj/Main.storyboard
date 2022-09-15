@@ -56,10 +56,47 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZEM-HQ-hJ1"/>
+                    <connections>
+                        <segue destination="xTE-OJ-T1Y" kind="presentation" identifier="toThirdVC" id="zaS-I3-ryD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Rc-qa-ywf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1757" y="52"/>
+        </scene>
+        <!--Third View Controller-->
+        <scene sceneID="QJT-wK-E7o">
+            <objects>
+                <viewController storyboardIdentifier="ThirdVC" id="nRb-M6-010" customClass="ThirdViewController" customModule="BirthdayReminder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kmV-Lr-40O">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="M1D-8S-ECh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Vzb-mr-b96"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j7s-dI-IF2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3479.7101449275365" y="51.5625"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gGF-wg-0Cd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xTE-OJ-T1Y" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3GI-yJ-DIw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nRb-M6-010" kind="relationship" relationship="rootViewController" id="dRL-Ph-hyb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fk1-Ct-6HP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2569.5652173913045" y="51.5625"/>
         </scene>
     </scenes>
     <resources>
