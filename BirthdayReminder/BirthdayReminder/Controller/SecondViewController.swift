@@ -7,11 +7,12 @@
 
 import UIKit
 
-protocol SecondVCDelegate {
-    func update()
+protocol SecondVCDelegate: AnyObject {
+    func update(person: Person)
 }
 
 class SecondViewController: UIViewController {
+    var person = Person()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +38,18 @@ class SecondViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let dvc = segue.destination as? ThirdViewController else { return }
-        dvc.hello.backgroundColor = .lightGray
+        dvc.secondVCDelegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.scrollEdgeAppearance = .none
     }
-
 }
+
+extension SecondViewController: SecondVCDelegate {
+    func update(person: Person) {
+        self.person.copy(from: person)
+    }
+}
+
+

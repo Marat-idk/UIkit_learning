@@ -52,6 +52,7 @@ extension UITextField {
 
         }
     }
+    // кнопка глаза для филда
     func enablePasswordToggle(){
         let button = UIButton(type: .custom)
         setPasswordToggleImage(button)
