@@ -7,9 +7,20 @@
 
 import Foundation
 
-enum Sex: String {
+enum Sex: String, CaseIterable {
     case man = "Парень"
     case woman = "Девушка"
+    
+    init?(value: Int) {
+        switch value {
+        case 0:
+            self = .man
+        case 1:
+            self = .woman
+        default:
+            return nil
+        }
+    }
 }
 
 class Person {
@@ -18,6 +29,10 @@ class Person {
     var age: Int
     var sex: Sex?
     var instNickname: String?
+    
+    var description: String {
+        return "(\(name), \(birthday), \(age), \(sex ?? .woman), \(instNickname)"
+    }
     
     init(name: String, birthday: Date, age: Int, sex: Sex? = nil, instNickname: String? = nil) {
         self.name = name

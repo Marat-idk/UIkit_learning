@@ -37,8 +37,12 @@ class SecondViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let dvc = segue.destination as? ThirdViewController else { return }
-        dvc.secondVCDelegate = self
+        if segue.identifier == "toThirdVC" {
+            if let destVC = segue.destination as? UINavigationController,
+                let dvc = destVC.topViewController as? ThirdViewController {
+                dvc.secondVCDelegate = self
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -49,6 +53,11 @@ class SecondViewController: UIViewController {
 extension SecondViewController: SecondVCDelegate {
     func update(person: Person) {
         self.person.copy(from: person)
+        
+//        let label = UILabel(frame: .init(x: 50, y: 150, width: 200, height: 150))
+//        label.numberOfLines = 0
+//        label.text = self.person.description
+//        self.view.addSubview(label)
     }
 }
 
