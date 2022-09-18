@@ -206,8 +206,19 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func doneButton(_ sender: Any) {
-        //secondVCDelegate?.update(person: Person(name: name ?? "", birthday: birthday ?? Date(), age: age ?? 0, sex: sex, instNickname: instNickname))
-//        secondVCDelegate?.update(person: Person(name: nameTextField.text ?? "", birthday: Date(), age: Int(ageTextField.text!) ?? 0, sex: Sex.init(rawValue: sexTextField.text!) ?? .man, instNickname: instaTextField.text ?? ""))
+        if nameTextField.text!.isEmpty {
+            let alert = UIAlertController(title: "Внимание", message: "Заполните поле с именем", preferredStyle: .alert)
+            let actionOk = UIAlertAction(title: "Ок", style: .default, handler: nil)
+            alert.addAction(actionOk)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        name = nameTextField.text!
+        birthday = datePicker.date
+        age = Int(ageTextField.text!)
+        sex = Sex(rawValue: sexTextField.text!)
+        instNickname = instaTextField.text
+        secondVCDelegate?.update(person: Person(name: name!, birthday: birthday ?? Date(), age: age ?? 0, sex: sex ?? .man, instNickname: instNickname ?? "None"))
         dismiss(animated: true, completion: nil)
     }
     
@@ -246,7 +257,7 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
     // округление изображения
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setRounded()
+        avatar.setRounded()
     }
     
     // добавление тулбара к пикерам
@@ -315,12 +326,6 @@ class ThirdViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(actionCancel)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
-    }
-    
-    // rounded uiimageview
-    func setRounded() {
-        avatar.layer.cornerRadius = avatar.frame.size.height / 2
-        avatar.clipsToBounds = true
     }
 }
 
