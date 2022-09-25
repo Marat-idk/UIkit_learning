@@ -16,30 +16,7 @@ class ViewController: UIViewController {
     var firstAudioLbl: UILabel!
     var secondAudioLbl: UILabel!
     
-//    var player = AVAudioPlayer()
-//    var timer: Timer?
-//
-//    lazy var thumbView: UIView = {
-//        let thumb = UIView()
-//        thumb.backgroundColor = UIColor(red: 112 / 255, green: 216 / 255, blue: 94 / 255, alpha: 1)
-//        return thumb
-//    }()
-//
-//    let sliderDuration: UISlider = {
-//        let slider = UISlider()
-//        slider.frame = CGRect(x: 0, y: 50, width: 350, height: 40)
-//        //slider.center.x = view.center.x
-//        slider.addTarget(self, action: #selector(changeCurrentTime(_:)), for: .valueChanged)
-//        return slider
-//    }()
-//
-//    let sliderValue: UISlider = {
-//        let slider = UISlider(frame: .init(x: 0, y: 100, width: 350, height: 40))
-//        slider.addTarget(self, action: #selector(changeValue(_:)), for: .valueChanged)
-//        slider.value = AVAudioSession.sharedInstance().outputVolume
-//        slider.maximumValue = 1.0
-//        return slider
-//    }()
+    var player = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,40 +31,20 @@ class ViewController: UIViewController {
         secondAudioBtn = setupAudioCustomButton(title: "Дурной Вкус - Пластинки", imgNamed: "plastinki")
         do {
             try firstAudioLbl = setupAudioLabel(audioName: firstAudioBtn.titleLabel!.text!)
+            try secondAudioLbl = setupAudioLabel(audioName: secondAudioBtn.titleLabel!.text!)
+            
+            view.addSubview(firstAudioBtn)
+            view.addSubview(secondAudioBtn)
+            view.addSubview(firstAudioLbl)
+            view.addSubview(secondAudioLbl)
+            setupAudioButtonPosition(button: firstAudioBtn, equalTo: view)
+            setupAudioButtonPosition(button: secondAudioBtn, equalTo: firstAudioBtn)
+            setupAudioLabelPosition(label: firstAudioLbl, button: firstAudioBtn)
+            setupAudioLabelPosition(label: secondAudioLbl, button: secondAudioBtn)
         } catch {
             print("Error")
         }
         
-        
-        
-        view.addSubview(firstAudioBtn)
-        view.addSubview(secondAudioBtn)
-        view.addSubview(firstAudioLbl)
-        setupAudioButtonPosition(button: firstAudioBtn, equalTo: view)
-        setupAudioButtonPosition(button: secondAudioBtn, equalTo: firstAudioBtn)
-        setupAudioLabelPosition(label: firstAudioLbl, button: firstAudioBtn)
-//        view.backgroundColor = .white
-//        // Do any additional setup after loading the view.
-//        
-//        sliderDuration.center.x = view.center.x
-//        sliderDuration.setThumbImage(thumbImage(radius: 15), for: .normal)
-//        sliderDuration.minimumTrackTintColor = UIColor(red: 112 / 255, green: 216 / 255, blue: 94 / 255, alpha: 1)
-//        sliderDuration.maximumTrackTintColor = UIColor(red: 201 / 255, green: 243 / 255, blue: 220 / 255, alpha: 1)
-//        self.view.addSubview(sliderDuration)
-//        
-//        sliderValue.center.x = view.center.x
-//        self.view.addSubview(sliderValue)
-        
-        
-//        do {
-//            if let path = Bundle.main.path(forResource: "Durnojj_Vkus_Navsegda", ofType: "mp3") {
-//                try player = AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-//                sliderDuration.maximumValue = Float(player.duration)
-//                //sliderValue.maximumValue = player.volume
-//            }
-//        } catch {
-//            print("Error")
-//        }
     }
     
     // настройка батн для аудио
@@ -105,9 +62,27 @@ class ViewController: UIViewController {
         btn.imageView?.translatesAutoresizingMaskIntoConstraints = false
         btn.titleLabel?.translatesAutoresizingMaskIntoConstraints = false
         btn.underlined(color: .lightGray)
-
+        btn.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        
         return btn
     }
+    
+    @objc func buttonTapped(_ sender: UIButton) throws {
+        performSegue(withIdentifier: "toModal", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toModal" {
+            if let destVC = segue.destination as? UINavigationController,
+                let dvc = destVC.topViewController as? ModalViewController,
+                let sender = sender as? UIButton{
+                dvc.audioName = sender.titleLabel!.text!
+                dvc.albumImage.image = sender.imageView!.image
+                dvc.pathToAudio = try? getPathToFile(name: sender.titleLabel!.text!)
+            }
+        }
+    }
+    
     // верстка батн
     func setupAudioButtonPosition(button btn: UIButton, equalTo anotherView: UIView) {
         if anotherView is UIButton {
@@ -128,9 +103,8 @@ class ViewController: UIViewController {
     }
     
     func setupAudioLabel(audioName: String) throws -> UILabel {
-        // получаем файл
-        let path = Bundle.main.path(forResource: "Durnojj_Vkus_Navsegda", ofType: "mp3")
-        let audio = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path!))
+        let path  = try getPathToFile(name: audioName)
+        let audio = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
         // получаем длительность аудио в секундах и преобразуем в m:s
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
@@ -148,52 +122,26 @@ class ViewController: UIViewController {
         lbl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-//
-//    @IBAction func startButton(_ sender: Any) {
-//        player.play()
-//        timer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(updateSliderCurrentTime), userInfo: nil, repeats: true)
-//    }
-//
-//
-//    @IBAction func stopButton(_ sender: Any) {
-//        player.pause()
-//    }
-//
-//    func thumbImage(radius: CGFloat) -> UIImage {
-//        thumbView.frame = CGRect(x: 0, y: radius / 2, width: radius, height: radius)
-//        thumbView.layer.cornerRadius = radius / 2
-//        let renderer = UIGraphicsImageRenderer(bounds: thumbView.bounds)
-//        return renderer.image { rendererContext in
-//            thumbView.layer.render(in: rendererContext.cgContext)
-//        }
-//    }
-//
-//    @objc func changeCurrentTime(_ sender: UISlider) {
-//        player.currentTime = TimeInterval(sliderDuration.value)
-//        //if !player.isPlaying { player.play(); print("now is playing") }
-//    }
-//
-//    @objc func updateSliderCurrentTime() {
-//        sliderDuration.value = Float(player.currentTime)
-//    }
-//
-//    @objc func changeValue(_ sender: UISlider) {
-//        MPVolumeView.setVolume(sliderValue.value)
-//    }
-    
+    // получаем путь к файл
+    func getPathToFile(name: String) throws -> String {
+        var path: String?
+        switch name {
+        case "Дурной Вкус - Навсегда":
+            path = Bundle.main.path(forResource: "Durnojj_Vkus_Navsegda", ofType: "mp3")
+        case "Дурной Вкус - Пластинки":
+            path = Bundle.main.path(forResource: "Plastinki", ofType: "mp3")
+        default:
+            throw ErrorLoadMusic.invalidFile("No such file")
+            
+        }
+        return path!
+    }
 }
 
-//extension MPVolumeView {
-//  static func setVolume(_ volume: Float) {
-//    let volumeView = MPVolumeView()
-//    let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
-//
-//    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
-//      slider?.value = volume
-//    }
-//  }
-//}
-
+enum ErrorLoadMusic: Error {
+    case invalidFile(String)
+}
+    
 // смена цвета заднего фона при нажатии
 class CustomUIButton: UIButton {
     override open var isHighlighted: Bool {

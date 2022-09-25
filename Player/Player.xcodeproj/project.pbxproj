@@ -7,22 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D221D21328DFAC2900F23357 /* Plastinki.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D221D21228DFAC2900F23357 /* Plastinki.mp3 */; };
+		D221D21528DFB57700F23357 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221D21428DFB57700F23357 /* ModalViewController.swift */; };
+		D221D21728E05D4900F23357 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D221D21628E05D4900F23357 /* Assets.xcassets */; };
+		D221D21928E0AE7200F23357 /* tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221D21828E0AE7200F23357 /* tools.swift */; };
 		D2D34EEF28DA3DF000120522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D34EEE28DA3DF000120522 /* AppDelegate.swift */; };
 		D2D34EF128DA3DF000120522 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D34EF028DA3DF000120522 /* SceneDelegate.swift */; };
 		D2D34EF328DA3DF000120522 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D34EF228DA3DF000120522 /* ViewController.swift */; };
 		D2D34EF628DA3DF000120522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D34EF428DA3DF000120522 /* Main.storyboard */; };
-		D2D34EF828DA3DF200120522 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2D34EF728DA3DF200120522 /* Assets.xcassets */; };
 		D2D34EFB28DA3DF200120522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2D34EF928DA3DF200120522 /* LaunchScreen.storyboard */; };
 		D2D34F0E28DA446200120522 /* Durnojj_Vkus_Navsegda.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D2D34F0D28DA446200120522 /* Durnojj_Vkus_Navsegda.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D221D21228DFAC2900F23357 /* Plastinki.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Plastinki.mp3; sourceTree = "<group>"; };
+		D221D21428DFB57700F23357 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		D221D21628E05D4900F23357 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		D221D21828E0AE7200F23357 /* tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tools.swift; sourceTree = "<group>"; };
 		D2D34EEB28DA3DF000120522 /* Player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Player.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2D34EEE28DA3DF000120522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2D34EF028DA3DF000120522 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D2D34EF228DA3DF000120522 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D2D34EF528DA3DF000120522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D2D34EF728DA3DF200120522 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2D34EFA28DA3DF200120522 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2D34EFC28DA3DF200120522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2D34F0D28DA446200120522 /* Durnojj_Vkus_Navsegda.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Durnojj_Vkus_Navsegda.mp3; sourceTree = "<group>"; };
@@ -63,9 +69,10 @@
 				D2D34EF028DA3DF000120522 /* SceneDelegate.swift */,
 				D2D34F0928DA440600120522 /* music */,
 				D2D34EF428DA3DF000120522 /* Main.storyboard */,
-				D2D34EF728DA3DF200120522 /* Assets.xcassets */,
 				D2D34EF928DA3DF200120522 /* LaunchScreen.storyboard */,
 				D2D34EFC28DA3DF200120522 /* Info.plist */,
+				D221D21628E05D4900F23357 /* Assets.xcassets */,
+				D221D21828E0AE7200F23357 /* tools.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -73,6 +80,7 @@
 		D2D34F0928DA440600120522 /* music */ = {
 			isa = PBXGroup;
 			children = (
+				D221D21228DFAC2900F23357 /* Plastinki.mp3 */,
 				D2D34F0D28DA446200120522 /* Durnojj_Vkus_Navsegda.mp3 */,
 			);
 			path = music;
@@ -82,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				D2D34EF228DA3DF000120522 /* ViewController.swift */,
+				D221D21428DFB57700F23357 /* ModalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,10 +153,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D221D21328DFAC2900F23357 /* Plastinki.mp3 in Resources */,
 				D2D34EFB28DA3DF200120522 /* LaunchScreen.storyboard in Resources */,
-				D2D34EF828DA3DF200120522 /* Assets.xcassets in Resources */,
 				D2D34EF628DA3DF000120522 /* Main.storyboard in Resources */,
 				D2D34F0E28DA446200120522 /* Durnojj_Vkus_Navsegda.mp3 in Resources */,
+				D221D21728E05D4900F23357 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +168,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D221D21528DFB57700F23357 /* ModalViewController.swift in Sources */,
 				D2D34EF328DA3DF000120522 /* ViewController.swift in Sources */,
 				D2D34EEF28DA3DF000120522 /* AppDelegate.swift in Sources */,
+				D221D21928E0AE7200F23357 /* tools.swift in Sources */,
 				D2D34EF128DA3DF000120522 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
