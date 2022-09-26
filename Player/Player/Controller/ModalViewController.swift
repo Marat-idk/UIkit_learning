@@ -19,6 +19,7 @@ class ModalViewController: UIViewController {
     var audioName: String!
     var pathToAudio: String?
     var player: AVAudioPlayer?
+    var timer = Timer()
     
     let audioArtistLabel: UILabel = {
         let lbl = UILabel()
@@ -55,7 +56,29 @@ class ModalViewController: UIViewController {
         slider.setThumbImage(renderer.image { rendererContext in
             thumb.layer.render(in: rendererContext.cgContext)
         }, for: .normal)
+        // таргет
+        slider.addTarget(self, action: #selector(changeCurrentTime(_:)), for: .valueChanged)
         return slider
+    }()
+    
+    let audioCurrentLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "00:00"
+        lbl.textAlignment = .left
+        lbl.font = .systemFont(ofSize: 14)
+        lbl.textColor = .lightGray
+        return lbl
+    }()
+    
+    let audioToEndLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "00:00"
+        lbl.textAlignment = .right
+        lbl.font = .systemFont(ofSize: 14)
+        lbl.textColor = .lightGray
+        return lbl
     }()
 
     override func viewDidLoad() {
@@ -63,18 +86,55 @@ class ModalViewController: UIViewController {
         title = audioName
         let atributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor:UIColor.gray]
         navigationController?.navigationBar.titleTextAttributes = atributes
+        
+        loadAudio()
 
         view.addSubview(albumImage)
         view.addSubview(audioArtistLabel)
         view.addSubview(audioNameLabel)
         view.addSubview(durationSlider)
+        view.addSubview(audioCurrentLabel)
+        view.addSubview(audioToEndLabel)
         setupNavigationController()
         setupAlbumImage()
         let namesOfArtistAndName = audioName.components(separatedBy: "-").map { $0.trimmingCharacters(in: .whitespaces) }
         setupAudioLabel(labelView: audioArtistLabel, equalTo: albumImage, namesOfArtistAndName[0])
         setupAudioLabel(labelView: audioNameLabel, equalTo: audioArtistLabel, namesOfArtistAndName[1])
         setupDurationSlider()
+        
+        setupAudioLengthLabel(label: audioCurrentLabel)
+        setupAudioLengthLabel(label: audioToEndLabel)
 
+        startPlaying()
+    }
+    
+    func loadAudio() {
+        if let path = pathToAudio {
+            player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+        }
+    }
+    
+    func startPlaying() {
+        player?.play()
+        timer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateCurrentTime() {
+        if let player = player {
+            durationSlider.value = Float(player.currentTime)
+            
+            let formatter = DateComponentsFormatter()
+            formatter.allowedUnits = [.minute, .second]
+            formatter.zeroFormattingBehavior = .pad
+            audioCurrentLabel.text = formatter.string(from: TimeInterval(player.currentTime))
+            audioToEndLabel.text = formatter.string(from: TimeInterval(player.duration - player.currentTime))!
+        }
+    }
+    
+    @objc func changeCurrentTime(_ sender: UISlider) {
+        if let player = player {
+            player.currentTime = TimeInterval(durationSlider.value)
+        }
     }
     
     // установка нав баров
@@ -128,9 +188,23 @@ class ModalViewController: UIViewController {
     }
     
     func setupDurationSlider() {
+        if let duration = player?.duration {
+            durationSlider.maximumValue = Float(duration)
+        }
         durationSlider.topAnchor.constraint(equalTo: audioNameLabel.bottomAnchor, constant: 60).isActive = true
         durationSlider.leadingAnchor.constraint(equalTo: albumImage.leadingAnchor).isActive = true
         durationSlider.trailingAnchor.constraint(equalTo: albumImage.trailingAnchor).isActive = true
         durationSlider.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    func setupAudioLengthLabel(label: UILabel) {
+        if label == audioCurrentLabel {
+            label.leadingAnchor.constraint(equalTo: durationSlider.leadingAnchor).isActive = true
+        } else {
+            label.trailingAnchor.constraint(equalTo: durationSlider.trailingAnchor).isActive = true
+        }
+        label.bottomAnchor.constraint(equalTo: durationSlider.topAnchor).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }
