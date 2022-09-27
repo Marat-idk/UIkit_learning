@@ -80,6 +80,14 @@ class ModalViewController: UIViewController {
         lbl.textColor = .lightGray
         return lbl
     }()
+    
+    let playPauseButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "pause_button"), for: .normal)
+        btn.addTarget(self, action: #selector(playPauseAudio(_:)), for: .touchUpInside)
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +103,7 @@ class ModalViewController: UIViewController {
         view.addSubview(durationSlider)
         view.addSubview(audioCurrentLabel)
         view.addSubview(audioToEndLabel)
+        view.addSubview(playPauseButton)
         setupNavigationController()
         setupAlbumImage()
         let namesOfArtistAndName = audioName.components(separatedBy: "-").map { $0.trimmingCharacters(in: .whitespaces) }
@@ -104,7 +113,8 @@ class ModalViewController: UIViewController {
         
         setupAudioLengthLabel(label: audioCurrentLabel)
         setupAudioLengthLabel(label: audioToEndLabel)
-
+        setupPlayPauseButton()
+        
         startPlaying()
     }
     
@@ -117,6 +127,18 @@ class ModalViewController: UIViewController {
     func startPlaying() {
         player?.play()
         timer = Timer.scheduledTimer(timeInterval: 0.0001, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func playPauseAudio(_ sender: UIButton) {
+        if let player = player {
+            if player.isPlaying {
+                player.pause()
+                sender.setImage(UIImage(named: "play_button"), for: .normal)
+            } else {
+                player.play()
+                sender.setImage(UIImage(named: "pause_button"), for: .normal)
+            }
+        }
     }
     
     @objc func updateCurrentTime() {
@@ -206,5 +228,10 @@ class ModalViewController: UIViewController {
         label.bottomAnchor.constraint(equalTo: durationSlider.topAnchor).isActive = true
         label.widthAnchor.constraint(equalToConstant: 60).isActive = true
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    func setupPlayPauseButton() {
+        playPauseButton.topAnchor.constraint(equalTo: durationSlider.bottomAnchor, constant: 40).isActive = true
+        playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 }
