@@ -8,9 +8,12 @@
 import UIKit
 import AVFoundation
 
-class ModalViewController: UIViewController {
+class AudioViewController: UIViewController {
+    
+    weak var delegate: PlaylistViewController?
+    
     // картинка альбома
-    let albumImage: UIImageView = {
+    var albumImage: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -48,7 +51,7 @@ class ModalViewController: UIViewController {
         
         // кастомный thumb
         let thumb = UIView()
-        thumb.backgroundColor = UIColor(red: 201 / 255, green: 243 / 255, blue: 220 / 255, alpha: 1)
+        thumb.backgroundColor = UIColor(red: 113 / 255, green: 222 / 255, blue: 121 / 255, alpha: 1)
         let radius = 20
         thumb.frame = CGRect(x: 0, y: radius / 2, width: radius, height: radius)
         thumb.layer.cornerRadius = CGFloat(radius / 2)
@@ -84,8 +87,27 @@ class ModalViewController: UIViewController {
     let playPauseButton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setImage(UIImage(named: "pause_button"), for: .normal)
+        btn.setImage(UIImage(named: "pause_button")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btn.tintColor = UIColor(red: 30 / 255, green: 30 / 255, blue: 30 / 255, alpha: 1)
         btn.addTarget(self, action: #selector(playPauseAudio(_:)), for: .touchUpInside)
+        return btn
+    }()
+    
+    let prevButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "prev_button")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btn.tintColor = UIColor(red: 30 / 255, green: 30 / 255, blue: 30 / 255, alpha: 1)
+        btn.addTarget(self, action: #selector(changeAudio), for: .touchUpInside)
+        return btn
+    }()
+    
+    let nextButton: UIButton = {
+        let btn = UIButton(type: .custom)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setImage(UIImage(named: "next_button")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        btn.tintColor = UIColor(red: 30 / 255, green: 30 / 255, blue: 30 / 255, alpha: 1)
+        btn.addTarget(self, action: #selector(changeAudio), for: .touchUpInside)
         return btn
     }()
 
@@ -96,7 +118,19 @@ class ModalViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = atributes
         
         loadAudio()
-
+        setupSubViews()
+        setupNavigationController()
+        startPlaying()
+    }
+    
+    func loadAudio() {
+        if let path = pathToAudio {
+            player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+        }
+    }
+    
+    // добавляем элементы вью и настраиваем их с помощью ограничений и тд
+    func setupSubViews() {
         view.addSubview(albumImage)
         view.addSubview(audioArtistLabel)
         view.addSubview(audioNameLabel)
@@ -104,7 +138,8 @@ class ModalViewController: UIViewController {
         view.addSubview(audioCurrentLabel)
         view.addSubview(audioToEndLabel)
         view.addSubview(playPauseButton)
-        setupNavigationController()
+        view.addSubview(prevButton)
+        view.addSubview(nextButton)
         setupAlbumImage()
         let namesOfArtistAndName = audioName.components(separatedBy: "-").map { $0.trimmingCharacters(in: .whitespaces) }
         setupAudioLabel(labelView: audioArtistLabel, equalTo: albumImage, namesOfArtistAndName[0])
@@ -113,15 +148,9 @@ class ModalViewController: UIViewController {
         
         setupAudioLengthLabel(label: audioCurrentLabel)
         setupAudioLengthLabel(label: audioToEndLabel)
-        setupPlayPauseButton()
-        
-        startPlaying()
-    }
-    
-    func loadAudio() {
-        if let path = pathToAudio {
-            player = try? AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-        }
+        setupManagePlayrButton(button: playPauseButton)
+        setupManagePlayrButton(button: prevButton)
+        setupManagePlayrButton(button: nextButton)
     }
     
     func startPlaying() {
@@ -133,11 +162,24 @@ class ModalViewController: UIViewController {
         if let player = player {
             if player.isPlaying {
                 player.pause()
-                sender.setImage(UIImage(named: "play_button"), for: .normal)
+                sender.setImage(UIImage(named: "play_button")?.withRenderingMode(.alwaysTemplate), for: .normal)
             } else {
                 player.play()
-                sender.setImage(UIImage(named: "pause_button"), for: .normal)
+                sender.setImage(UIImage(named: "pause_button")?.withRenderingMode(.alwaysTemplate), for: .normal)
             }
+        }
+    }
+    
+    @objc func changeAudio() {
+        if let (name, img, path) = delegate?.update(audioName: audioName) {
+            audioName = name
+            let namesOfArtistAndName = audioName.components(separatedBy: "-").map { $0.trimmingCharacters(in: .whitespaces) }
+            audioArtistLabel.text = namesOfArtistAndName[0]
+            audioNameLabel.text = namesOfArtistAndName[1]
+            albumImage.image = img
+            pathToAudio = path
+            loadAudio()
+            player?.play()
         }
     }
     
@@ -193,7 +235,7 @@ class ModalViewController: UIViewController {
     func setupAlbumImage() {
         albumImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         albumImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        albumImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85).isActive = true
+        albumImage.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         albumImage.heightAnchor.constraint(equalTo: albumImage.widthAnchor).isActive = true
     }
 
@@ -230,8 +272,18 @@ class ModalViewController: UIViewController {
         label.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
-    func setupPlayPauseButton() {
-        playPauseButton.topAnchor.constraint(equalTo: durationSlider.bottomAnchor, constant: 40).isActive = true
-        playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    func setupManagePlayrButton(button: UIButton) {
+        button.topAnchor.constraint(equalTo: durationSlider.bottomAnchor, constant: 40).isActive = true
+        switch button {
+        case playPauseButton:
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        case prevButton:
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -100).isActive = true
+        case nextButton:
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 100).isActive = true
+        default:
+            return
+        }
+        
     }
 }

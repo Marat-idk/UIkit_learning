@@ -8,7 +8,11 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController {
+protocol PlaylistViewControllerProtocol {
+    func update(audioName: String) -> (String, UIImage, String)?
+}
+
+class PlaylistViewController: UIViewController {
     
     var firstAudioBtn: CustomUIButton!
     var secondAudioBtn: CustomUIButton!
@@ -16,19 +20,25 @@ class ViewController: UIViewController {
     var firstAudioLbl: UILabel!
     var secondAudioLbl: UILabel!
     
-    var player = AVAudioPlayer()
+    var playlist = ["Дурной Вкус - Навсегда", "Дурной Вкус - Пластинки"]
+    
+    //var player = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Plist"
         // изменение шрифта и цвета заголовка
-        let atributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24), NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
+        let atributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24), NSAttributedString.Key.foregroundColor:UIColor.black]
         navigationController?.navigationBar.titleTextAttributes = atributes
         
         
-        firstAudioBtn = setupAudioCustomButton(title: "Дурной Вкус - Навсегда", imgNamed: "durnoy_vkus")
-        secondAudioBtn = setupAudioCustomButton(title: "Дурной Вкус - Пластинки", imgNamed: "plastinki")
+        setupSubViews()
+    }
+    
+    func setupSubViews() {
+        firstAudioBtn = setupAudioCustomButton(title: playlist[0])
+        secondAudioBtn = setupAudioCustomButton(title: playlist[1])
         do {
             try firstAudioLbl = setupAudioLabel(audioName: firstAudioBtn.titleLabel!.text!)
             try secondAudioLbl = setupAudioLabel(audioName: secondAudioBtn.titleLabel!.text!)
@@ -44,17 +54,16 @@ class ViewController: UIViewController {
         } catch {
             print("Error")
         }
-        
     }
     
     // настройка батн для аудио
-    func setupAudioCustomButton(title: String, imgNamed: String) -> CustomUIButton {
+    func setupAudioCustomButton(title: String) -> CustomUIButton {
         var filled = UIButton.Configuration.filled()
         filled.baseBackgroundColor = .white
         // установка шрифта и цвета заголовка
         filled.attributedTitle = AttributedString(NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20), NSAttributedString.Key.foregroundColor:UIColor.black]))
         // установка картинки для батн
-        if let image = UIImage(named: imgNamed) {
+        if let image = try? getAlbumImage(name: title) {
             filled.image = image
         }
         let btn = CustomUIButton(configuration: filled, primaryAction: nil)
@@ -74,10 +83,11 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toModal" {
             if let destVC = segue.destination as? UINavigationController,
-                let dvc = destVC.topViewController as? ModalViewController,
+                let dvc = destVC.topViewController as? AudioViewController,
                 let sender = sender as? UIButton{
+                dvc.delegate = self
                 dvc.audioName = sender.titleLabel!.text!
-                dvc.albumImage.image = sender.imageView!.image
+                dvc.albumImage.image = try? getAlbumImage(name: dvc.audioName)
                 dvc.pathToAudio = try? getPathToFile(name: sender.titleLabel!.text!)
             }
         }
@@ -122,6 +132,19 @@ class ViewController: UIViewController {
         lbl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    func getAlbumImage(name: String) throws -> UIImage {
+        var image: UIImage!
+        switch name {
+        case "Дурной Вкус - Навсегда":
+            image = UIImage(named: "durnoy_vkus")
+        case "Дурной Вкус - Пластинки":
+            image = UIImage(named: "plastinki")
+        default:
+            throw ErrorLoadMusic.invalidFile("No such image")
+        }
+        return image
+    }
+    
     // получаем путь к файл
     func getPathToFile(name: String) throws -> String {
         var path: String?
@@ -135,6 +158,23 @@ class ViewController: UIViewController {
             
         }
         return path!
+    }
+}
+
+extension PlaylistViewController: PlaylistViewControllerProtocol {
+    func update(audioName: String) -> (String, UIImage, String)? {
+        var audio: String
+        switch audioName {
+        case playlist[0]:
+            audio = playlist[1]
+            return (audio, try! getAlbumImage(name: audio), try! getPathToFile(name: audio))
+        case playlist[1]:
+            audio = playlist[0]
+            return (audio, try! getAlbumImage(name: audio), try! getPathToFile(name: audio))
+        default:
+            return nil
+        }
+        
     }
 }
 
