@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  ShopApp
 //
-//  Created by Maxim Raskevich on 01.10.2022.
+//  Created by Marat on 01.10.2022.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let navigationController = UINavigationController(rootViewController: ViewController())
+        let navigationController = UINavigationController(rootViewController: MainTabBarController())
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }

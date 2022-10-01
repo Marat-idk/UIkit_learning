@@ -2,17 +2,17 @@
 //  ViewController.swift
 //  ShopApp
 //
-//  Created by Maxim Raskevich on 01.10.2022.
+//  Created by Marat on 01.10.2022.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .magenta
+        view.backgroundColor = .gray
         
         let toNextVCButton = UIButton(frame: .init(x: 0, y: 0, width: 200, height: 200))
         toNextVCButton.center = view.center
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     @objc func toNextVC() {
-        let testVC = TestViewController()
+        let testVC = ProfileViewController()
         navigationController?.pushViewController(testVC, animated: true)
     }
 

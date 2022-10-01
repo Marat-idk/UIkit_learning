@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ShopApp
 //
-//  Created by Maxim Raskevich on 01.10.2022.
+//  Created by Marat on 01.10.2022.
 //
 
 import UIKit
