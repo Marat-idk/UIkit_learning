@@ -12,14 +12,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = .gray
+        view.backgroundColor = .magenta
         
-        let toNextVCButton = UIButton(frame: .init(x: 0, y: 0, width: 200, height: 200))
+        let toNextVCButton = UIButton(frame: .init(x: 0, y: 0, width: view.bounds.width * 0.5, height: view.bounds.width * 0.5))
         toNextVCButton.center = view.center
         toNextVCButton.setTitle("Go next", for: .normal)
         toNextVCButton.backgroundColor = .systemPink
         toNextVCButton.addTarget(self, action: #selector(toNextVC), for: .touchUpInside)
-        view.addSubview(toNextVCButton)
+        //view.addSubview(toNextVCButton)
     }
     
     @objc func toNextVC() {

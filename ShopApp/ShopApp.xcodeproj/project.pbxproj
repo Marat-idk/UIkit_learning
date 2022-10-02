@@ -14,7 +14,7 @@
 		D240EEA828E89D9B00E19368 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEA728E89D9B00E19368 /* MainTabBarController.swift */; };
 		D240EEAA28E8A0D500E19368 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEA928E8A0D500E19368 /* ProfileViewController.swift */; };
 		D240EEAC28E8A0DD00E19368 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEAB28E8A0DD00E19368 /* HomeViewController.swift */; };
-		D240EEAE28E8A5CB00E19368 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEAD28E8A5CB00E19368 /* UIColorExtension.swift */; };
+		D240EEAE28E8A5CB00E19368 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEAD28E8A5CB00E19368 /* UIExtensions.swift */; };
 		D240EEB028E8A9DC00E19368 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D240EEAF28E8A9DC00E19368 /* CartViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,7 @@
 		D240EEA728E89D9B00E19368 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		D240EEA928E8A0D500E19368 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D240EEAB28E8A0DD00E19368 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		D240EEAD28E8A5CB00E19368 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		D240EEAD28E8A5CB00E19368 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		D240EEAF28E8A9DC00E19368 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +68,7 @@
 				D240EEA928E8A0D500E19368 /* ProfileViewController.swift */,
 				D240EEAB28E8A0DD00E19368 /* HomeViewController.swift */,
 				D240EEAF28E8A9DC00E19368 /* CartViewController.swift */,
-				D240EEAD28E8A5CB00E19368 /* UIColorExtension.swift */,
+				D240EEAD28E8A5CB00E19368 /* UIExtensions.swift */,
 				D240EE9A28E867CB00E19368 /* Assets.xcassets */,
 				D240EE9C28E867CB00E19368 /* LaunchScreen.storyboard */,
 				D240EE9F28E867CB00E19368 /* Info.plist */,
@@ -152,7 +152,7 @@
 				D240EEA828E89D9B00E19368 /* MainTabBarController.swift in Sources */,
 				D240EEAA28E8A0D500E19368 /* ProfileViewController.swift in Sources */,
 				D240EE9428E867C700E19368 /* SceneDelegate.swift in Sources */,
-				D240EEAE28E8A5CB00E19368 /* UIColorExtension.swift in Sources */,
+				D240EEAE28E8A5CB00E19368 /* UIExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
