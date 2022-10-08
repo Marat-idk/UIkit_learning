@@ -38,10 +38,11 @@ class MainTabBarController: UITabBarController {
     }
     
     // генерируем элементы таббара с заголовком и картинкой
-    private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
+    private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UINavigationController {
+        let navigationVC = UINavigationController(rootViewController: viewController)
         viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
-        return viewController
+        return navigationVC
     }
     
     // изменяем внешний вид таббара

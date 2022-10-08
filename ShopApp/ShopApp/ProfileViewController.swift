@@ -82,6 +82,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
         btn.backgroundColor = UIColor(red: 27 / 255, green: 74 / 255, blue: 252 / 255, alpha: 1)
         btn.layer.cornerRadius = 7.0
+        btn.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
         return btn
     }()
 
@@ -150,4 +151,34 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextField.resignFirstResponder()
         return true
     }
+    
+    @objc func toProfile() {
+        let profileSignInVc = ProfileSignInViewController()
+        navigationController?.pushViewController(profileSignInVc, animated: true)
+    }
+}
+
+class ProfileSignInViewController: UIViewController {
+    
+    let errorLable: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Упс!\nЧто-то пошло не так"
+        lbl.textAlignment = .center
+        lbl.numberOfLines = 0
+        lbl.font = .boldSystemFont(ofSize: 22)
+        return lbl
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        
+        view.addSubview(errorLable)
+        errorLable.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        errorLable.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        errorLable.widthAnchor.constraint(equalToConstant: 220).isActive = true
+        errorLable.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+    
 }

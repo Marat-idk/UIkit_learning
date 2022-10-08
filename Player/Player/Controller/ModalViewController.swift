@@ -171,6 +171,8 @@ class AudioViewController: UIViewController {
     }
     
     @objc func changeAudio() {
+        player?.pause()
+        player?.stop()
         if let (name, img, path) = delegate?.update(audioName: audioName) {
             audioName = name
             let namesOfArtistAndName = audioName.components(separatedBy: "-").map { $0.trimmingCharacters(in: .whitespaces) }
@@ -209,6 +211,7 @@ class AudioViewController: UIViewController {
     
     @objc func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+        player?.pause()
         player?.stop()
     }
     
@@ -230,6 +233,12 @@ class AudioViewController: UIViewController {
         super.viewDidLayoutSubviews()
         albumImage.layer.cornerRadius = 15.0
         albumImage.clipsToBounds = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        player?.pause()
+        player?.stop()
     }
     
     func setupAlbumImage() {
