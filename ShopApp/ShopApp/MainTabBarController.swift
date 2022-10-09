@@ -2,7 +2,7 @@
 //  MainTabBarController.swift
 //  ShopApp
 //
-//  Created by Enkidu on 01.10.2022.
+//  Created by Marat on 01.10.2022.
 //
 
 import UIKit
@@ -66,13 +66,15 @@ class MainTabBarController: UITabBarController {
         roundLayer.path = bezierPath.cgPath
         
         tabBar.layer.insertSublayer(roundLayer, at: 0)
+        // задание линии на границах таббара
         roundLayer.lineWidth = 0.8
         roundLayer.strokeColor = UIColor.black.cgColor
         roundLayer.fillColor = UIColor.black.cgColor
         
         tabBar.itemWidth = width / 5
-        //tabBar.itemPositioning = .centered
+        // tabBar.itemPositioning = .centered
         
+        // задание цвета таббара
         roundLayer.fillColor = UIColor.tabBarColor.cgColor
         
         tabBar.unselectedItemTintColor = .tabBarItemColor

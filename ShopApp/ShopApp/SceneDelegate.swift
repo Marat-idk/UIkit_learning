@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         //let navigationController = UINavigationController(rootViewController: MainTabBarController())
         window?.rootViewController = MainTabBarController()
-        
+        // показать на экране
         window?.makeKeyAndVisible()
     }
 

@@ -94,6 +94,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
         
         setupSubView()
         setConstraints()
+        
     }
     
     func setupSubView() {
@@ -130,7 +131,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     
     func setupSignInLabel() {
         signInLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.frame.maxX / 13).isActive = true
-        signInLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: -180).isActive = true
+        signInLabel.topAnchor.constraint(lessThanOrEqualTo: titleLabel.bottomAnchor, constant: view.frame.maxY / 7.5 ).isActive = true
         signInLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
         signInLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
@@ -158,6 +159,7 @@ class ProfileViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+// виью контроллер, который отображается при входе в профиль
 class ProfileSignInViewController: UIViewController {
     
     let errorLable: UILabel = {

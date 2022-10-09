@@ -64,3 +64,20 @@ extension UITextField {
     
     
 }
+
+extension UIButton {
+    func underlined(color: UIColor) {
+        let borderView = UIView()
+        borderView.backgroundColor = color
+        borderView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(borderView)
+        NSLayoutConstraint.activate(
+            [
+                borderView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+                borderView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+                borderView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+                borderView.heightAnchor.constraint(equalToConstant: 1.0)
+            ]
+        )
+    }
+}
