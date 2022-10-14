@@ -15,7 +15,7 @@ class DeviceViewController: UIViewController {
     var deviceImageView: UIImageView!
     var deviceImages: [UIImage]?
     var totalPriceLabel: UILabel!
-
+    var storage: Int?
     
     let storageLabel: UILabel = {
         let lbl = UILabel()
@@ -83,6 +83,7 @@ class DeviceViewController: UIViewController {
         generateViews()
         addSubView()
         setConstraints()
+        setupShareButton()
     }
     
     func generateViews() {
@@ -138,6 +139,8 @@ class DeviceViewController: UIViewController {
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: true)
         storageTextField.inputAccessoryView = toolbar
         storageTextField.inputView = storagePicker
+        // disable input blinking cursor
+        storageTextField.tintColor = .clear
     }
     
     func generateTotalPriceLabel() {
@@ -238,6 +241,10 @@ class DeviceViewController: UIViewController {
     
     // done батн для пикера
     @objc func donePicker(_ sender: UIPickerView) {
+        guard let storage = storage, let device = device else { return }
+        storageTextField.text = String(storage) + " гб"
+        totalPriceLabel.text = String(device.storagePrices[storage]!) + " руб."
+        
         self.view.endEditing(true)
     }
     
@@ -245,6 +252,18 @@ class DeviceViewController: UIViewController {
     @objc func cancelPicker() {
         // убрать пикер по кнопке cancel
         self.view.endEditing(true)
+    }
+    
+    func setupShareButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
+    }
+    
+    @objc func share(_ sender: UIBarButtonItem) {
+        let avc = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        avc.excludedActivityTypes = [.airDrop, .postToTwitter]
+        //avc.popoverPresentationController?.sourceView = self.view
+        //avc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        self.present(avc, animated: true, completion: nil)
     }
     
 }
@@ -266,7 +285,8 @@ extension DeviceViewController: UIPickerViewDataSource {
 extension DeviceViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 0 {
-            let keys = Array(device!.storagePrices.keys).sorted()
+            guard let device = device else { return "" }
+            let keys = Array(device.storagePrices.keys).sorted()
             return String(keys[row]) + " гб"
         }
         return ""
@@ -274,9 +294,25 @@ extension DeviceViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView.tag == 0 {
-            let keys = Array(device!.storagePrices.keys).sorted()
-            storageTextField.text = String(keys[row]) + " гб"
-            totalPriceLabel.text = String(device!.storagePrices[keys[row]]!) + " руб."
+            guard let device = device else { return }
+            let keys = Array(device.storagePrices.keys).sorted()
+            storage = keys[row]
+            //storageTextField.text = String(keys[row]) + " гб"
+            //rotalPriceLabel.text = String(device.storagePrices[keys[row]]!) + " руб."
         }
+    }
+}
+
+extension DeviceViewController: UIActivityItemSource {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "hehehe"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return "abc def"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return "subject"
     }
 }
