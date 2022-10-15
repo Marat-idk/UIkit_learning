@@ -50,14 +50,14 @@ class MainTabBarController: UITabBarController {
         let positionOnX = 10.0
         let positionOnY = 13.0
         let width = tabBar.bounds.width - positionOnX * 2
-        let height = tabBar.bounds.height + positionOnY
+        let height = tabBar.bounds.height + positionOnY * 0.4
         
         let roundLayer = CAShapeLayer()
         
         let bezierPath = UIBezierPath(
             roundedRect: .init(
                         x: positionOnX,
-                        y: tabBar.bounds.minY - positionOnY * 0.5,
+                        y: tabBar.bounds.minY - positionOnY * 0.2,
                         width: width,
                         height: height
             ),

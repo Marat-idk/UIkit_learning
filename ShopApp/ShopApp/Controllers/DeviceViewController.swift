@@ -110,6 +110,10 @@ class DeviceViewController: UIViewController {
             deviceSegmentedConroller.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
                                                              NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)],
                                                             for: .normal)
+            deviceSegmentedConroller.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
+                                                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)],
+                                                            for: .selected)
+
             deviceSegmentedConroller.addTarget(self, action: #selector(changeImage(sender:)), for: .valueChanged)
             for color in colors {
                 deviceSegmentedConroller.insertSegment(
@@ -127,8 +131,10 @@ class DeviceViewController: UIViewController {
         }
     }
     
+    // создаем пикер с вариантами памяти девайса
     func generateStoragePicker() {
         storageTextField.text = String(device!.storagePrices.keys.first!) + " гб"
+        storage = device!.storagePrices.keys.first!
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -143,6 +149,7 @@ class DeviceViewController: UIViewController {
         storageTextField.tintColor = .clear
     }
     
+    // лейбл с ценой
     func generateTotalPriceLabel() {
         totalPriceLabel = UILabel()
         totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -259,11 +266,12 @@ class DeviceViewController: UIViewController {
     }
     
     @objc func share(_ sender: UIBarButtonItem) {
-        let avc = UIActivityViewController(activityItems: [self], applicationActivities: nil)
-        avc.excludedActivityTypes = [.airDrop, .postToTwitter]
-        //avc.popoverPresentationController?.sourceView = self.view
-        //avc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        self.present(avc, animated: true, completion: nil)
+        let activityVC = UIActivityViewController(activityItems: [self], applicationActivities: nil)
+        // исключаем отправку в некоторые таргеты
+        activityVC.excludedActivityTypes = [.airDrop, .postToTwitter]
+        // правильное отображение на айпаде
+        activityVC.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        self.present(activityVC, animated: true, completion: nil)
     }
     
 }
@@ -297,22 +305,23 @@ extension DeviceViewController: UIPickerViewDelegate {
             guard let device = device else { return }
             let keys = Array(device.storagePrices.keys).sorted()
             storage = keys[row]
-            //storageTextField.text = String(keys[row]) + " гб"
-            //rotalPriceLabel.text = String(device.storagePrices[keys[row]]!) + " руб."
         }
     }
 }
 
 extension DeviceViewController: UIActivityItemSource {
+    // используется только для того, чтобы UIKit знал тип данных, которыми нужно поделиться
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return "hehehe"
+        return "placeholer"
     }
-    
+    // content
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return "abc def"
+        guard let device = device, let storage = storage else { return "" }
+        let colorIndex = deviceSegmentedConroller.selectedSegmentIndex >= 0 ? deviceSegmentedConroller.selectedSegmentIndex : 0
+        return "\(device.name), \(device.colors[colorIndex]) \(storage) гб \(device.storagePrices[storage]!) руб."
     }
-    
+    // subject of msg
     func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return "subject"
+        return "Device"
     }
 }
