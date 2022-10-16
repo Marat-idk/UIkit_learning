@@ -115,12 +115,15 @@ class DeviceViewController: UIViewController {
                                                             for: .selected)
 
             deviceSegmentedConroller.addTarget(self, action: #selector(changeImage(sender:)), for: .valueChanged)
+            // заполняем сегмент элементами
             for color in colors {
                 deviceSegmentedConroller.insertSegment(
                     withTitle: color.description,
                     at: deviceSegmentedConroller.numberOfSegments,
                     animated: false)
             }
+            // устанавливаем дефолтное выбранное значение
+            deviceSegmentedConroller.selectedSegmentIndex = 0
         }
     }
     
