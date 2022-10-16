@@ -130,6 +130,8 @@ class DeviceViewController: UIViewController {
     func generateImageView() {
         if let images = deviceImages {
             deviceImageView = UIImageView(image: images[0])
+            deviceImageView.contentMode = .scaleAspectFit
+            deviceImageView.clipsToBounds = true
             deviceImageView.translatesAutoresizingMaskIntoConstraints = false
         }
     }
@@ -192,13 +194,11 @@ class DeviceViewController: UIViewController {
     }
     
     func setupImageView() {
-        deviceImageView.image = deviceImageView.image?.resize(size: CGSize(width: 300, height: 300))
-//        let w = (view.frame.width * 0.3)/view.frame.width
-//        let h = (view.frame.height * 0.3)/view.frame.height
         deviceImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         deviceImageView.topAnchor.constraint(equalTo: deviceNameLabel.bottomAnchor, constant: 20).isActive = true
-        deviceImageView.widthAnchor.constraint(equalToConstant: deviceImageView.image!.size.width).isActive = true
-        deviceImageView.heightAnchor.constraint(equalToConstant: deviceImageView.image!.size.height).isActive = true
+        deviceImageView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        deviceImageView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        deviceImageView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5).isActive = true
     }
     
     func setupSegmentedConroller() {
