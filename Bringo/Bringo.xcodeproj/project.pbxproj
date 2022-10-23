@@ -14,6 +14,10 @@
 		D204B58E28FB3C3A0014982B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D204B58C28FB3C3A0014982B /* LaunchScreen.storyboard */; };
 		D204B59628FCADF50014982B /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204B59528FCADF50014982B /* UIExtensions.swift */; };
 		D204B599290087A80014982B /* FoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204B598290087A80014982B /* FoodViewController.swift */; };
+		D21BBB972901C31900E12939 /* PizzaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BBB962901C31900E12939 /* PizzaViewController.swift */; };
+		D21CB74F29059AC300BAA419 /* Pizza.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB74E29059AC200BAA419 /* Pizza.swift */; };
+		D21CB75329059C8400BAA419 /* PizzaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB75229059C8400BAA419 /* PizzaCell.swift */; };
+		D21CB7552905C97600BAA419 /* PizzaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		D204B58F28FB3C3A0014982B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D204B59528FCADF50014982B /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		D204B598290087A80014982B /* FoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodViewController.swift; sourceTree = "<group>"; };
+		D21BBB962901C31900E12939 /* PizzaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaViewController.swift; sourceTree = "<group>"; };
+		D21CB74E29059AC200BAA419 /* Pizza.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pizza.swift; sourceTree = "<group>"; };
+		D21CB75229059C8400BAA419 /* PizzaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaCell.swift; sourceTree = "<group>"; };
+		D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 		D204B58028FB3C340014982B /* Bringo */ = {
 			isa = PBXGroup;
 			children = (
+				D21CB75129059AE500BAA419 /* Model */,
 				D204B58128FB3C340014982B /* AppDelegate.swift */,
 				D204B58328FB3C340014982B /* SceneDelegate.swift */,
 				D204B597290082BE0014982B /* Controllers */,
@@ -74,8 +83,19 @@
 			children = (
 				D204B58528FB3C340014982B /* LoginViewController.swift */,
 				D204B598290087A80014982B /* FoodViewController.swift */,
+				D21CB75229059C8400BAA419 /* PizzaCell.swift */,
+				D21BBB962901C31900E12939 /* PizzaViewController.swift */,
+				D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D21CB75129059AE500BAA419 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D21CB74E29059AC200BAA419 /* Pizza.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,11 +168,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21CB75329059C8400BAA419 /* PizzaCell.swift in Sources */,
+				D21CB74F29059AC300BAA419 /* Pizza.swift in Sources */,
 				D204B58628FB3C340014982B /* LoginViewController.swift in Sources */,
 				D204B599290087A80014982B /* FoodViewController.swift in Sources */,
 				D204B58228FB3C340014982B /* AppDelegate.swift in Sources */,
 				D204B58428FB3C340014982B /* SceneDelegate.swift in Sources */,
+				D21CB7552905C97600BAA419 /* PizzaDetailViewController.swift in Sources */,
 				D204B59628FCADF50014982B /* UIExtensions.swift in Sources */,
+				D21BBB972901C31900E12939 /* PizzaViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

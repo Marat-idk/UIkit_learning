@@ -17,6 +17,7 @@ class FoodViewController: UIViewController {
         btn.setTitleColor(.darkGray, for: .highlighted)
         btn.titleLabel?.font = .systemFont(ofSize: 18)
         btn.layer.borderWidth = 1
+        btn.addTarget(self, action: #selector(toPizzaViewController), for: .touchUpInside)
         return btn
     }()
     
@@ -67,9 +68,6 @@ class FoodViewController: UIViewController {
         pizzaButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         pizzaButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: view.bounds.height / 15).isActive = true
         pizzaButton.heightAnchor.constraint(equalToConstant: view.bounds.height / 9).isActive = true
-        print(view.bounds.height)
-        print(view.bounds.height / 60)
-        print(view.bounds.height / 100)
     }
     
     func sushiButtonConstraints() {
@@ -86,6 +84,12 @@ class FoodViewController: UIViewController {
         alert.addAction(actionOk)
         // animated: true - плавный показ алерта
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func toPizzaViewController() {
+        let vc = PizzaViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
 }

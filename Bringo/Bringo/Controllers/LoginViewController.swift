@@ -194,7 +194,11 @@ class LoginViewConroller: UIViewController {
         }
         return result
     }
-
+    
+    // TODO: format for diff countries
+//    func getFormatNumber(_ phoneNumber: String) -> String {
+//        if phoneNumber.c
+//    }
 }
 
 extension LoginViewConroller: UITextFieldDelegate {
