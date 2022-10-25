@@ -18,7 +18,7 @@ class PizzaCell: UITableViewCell {
             btn.tintColor = .white
         }
         btn.backgroundColor = UIColor(red: 240 / 255, green: 142 / 255, blue: 51 / 255, alpha: 1)
-        btn.layer.borderWidth = 1
+        btn.layer.borderWidth = 1.5
         btn.layer.borderColor = UIColor(red: 237 / 255, green: 109 / 255, blue: 51 / 255, alpha: 1).cgColor
         btn.layer.cornerRadius = 15
         btn.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)

@@ -49,7 +49,7 @@ class PizzaViewController: UIViewController {
         )
     }
     
-    @objc func toPizzaDetail(name: String, image: UIImage) {
+    @objc func toPizzaDetailVC(name: String, image: UIImage) {
         let navVC = UINavigationController(rootViewController: PizzaDetailViewController(pizzaName: name, pizzaImage: image))
         present(navVC, animated: true, completion: nil)
     }
@@ -65,7 +65,7 @@ extension PizzaViewController: UITableViewDataSource {
         cell.set(pizza: pizzas[indexPath.row])
         // добавляем акшен для каждой ячейки
         cell.addButtonPressed = { (name: String, image: UIImage) -> () in
-            self.toPizzaDetail(name: name, image: image)
+            self.toPizzaDetailVC(name: name, image: image)
         }
         return cell
     }
