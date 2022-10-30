@@ -18,6 +18,7 @@
 		D21CB74F29059AC300BAA419 /* Pizza.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB74E29059AC200BAA419 /* Pizza.swift */; };
 		D21CB75329059C8400BAA419 /* PizzaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB75229059C8400BAA419 /* PizzaCell.swift */; };
 		D21CB7552905C97600BAA419 /* PizzaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */; };
+		D21CB7572908ADA800BAA419 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21CB7562908ADA800BAA419 /* OrderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D21CB74E29059AC200BAA419 /* Pizza.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pizza.swift; sourceTree = "<group>"; };
 		D21CB75229059C8400BAA419 /* PizzaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaCell.swift; sourceTree = "<group>"; };
 		D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaDetailViewController.swift; sourceTree = "<group>"; };
+		D21CB7562908ADA800BAA419 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +85,10 @@
 			children = (
 				D204B58528FB3C340014982B /* LoginViewController.swift */,
 				D204B598290087A80014982B /* FoodViewController.swift */,
-				D21CB75229059C8400BAA419 /* PizzaCell.swift */,
 				D21BBB962901C31900E12939 /* PizzaViewController.swift */,
+				D21CB75229059C8400BAA419 /* PizzaCell.swift */,
 				D21CB7542905C97600BAA419 /* PizzaDetailViewController.swift */,
+				D21CB7562908ADA800BAA419 /* OrderViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D21CB75329059C8400BAA419 /* PizzaCell.swift in Sources */,
+				D21CB7572908ADA800BAA419 /* OrderViewController.swift in Sources */,
 				D21CB74F29059AC300BAA419 /* Pizza.swift in Sources */,
 				D204B58628FB3C340014982B /* LoginViewController.swift in Sources */,
 				D204B599290087A80014982B /* FoodViewController.swift in Sources */,

@@ -49,7 +49,7 @@ class PizzaViewController: UIViewController {
         )
     }
     
-    @objc func toPizzaDetailVC(name: String, image: UIImage) {
+    func toPizzaDetailVC(name: String, image: UIImage) {
         let navVC = UINavigationController(rootViewController: PizzaDetailViewController(pizzaName: name, pizzaImage: image))
         present(navVC, animated: true, completion: nil)
     }

@@ -157,8 +157,9 @@ class LoginViewConroller: UIViewController {
     
     @objc func toFoodViewController() {
         let foodVC = FoodViewController()
-        navigationController?.pushViewController(foodVC, animated: true)
-        foodVC.navigationItem.hidesBackButton = true
+        let navigationController = UINavigationController(rootViewController: foodVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
     
     func setupTapGestureRecognizer() {

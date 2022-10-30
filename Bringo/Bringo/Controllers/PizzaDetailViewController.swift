@@ -15,10 +15,16 @@ class PizzaDetailViewController: UIViewController {
     var pizzaNameLabel: UILabel!
     var pizzaImageView: UIImageView!
     
-    let cheeseLabel: UILabel = {
+    private let cheese:   String
+    private let ham:      String
+    private let mushroom: String
+    private let olive:    String
+    var toppings: [String] = []
+    
+    lazy var cheeseLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Сыр мацарела"
+        lbl.text = cheese
         lbl.font = .boldSystemFont(ofSize: 22)
         lbl.textColor = .darkGray
         lbl.textAlignment = .left
@@ -28,13 +34,15 @@ class PizzaDetailViewController: UIViewController {
     let cheeseSwitch: UISwitch = {
         let sw = UISwitch()
         sw.translatesAutoresizingMaskIntoConstraints = false
+        sw.tag = 0
+        sw.addTarget(self, action: #selector(switchTopping(_:)), for: .valueChanged)
         return sw
     }()
     
-    let hamLabel: UILabel = {
+    lazy var hamLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Ветчина"
+        lbl.text = ham
         lbl.font = .boldSystemFont(ofSize: 22)
         lbl.textColor = .darkGray
         lbl.textAlignment = .left
@@ -44,13 +52,15 @@ class PizzaDetailViewController: UIViewController {
     let hamSwitch: UISwitch = {
         let sw = UISwitch()
         sw.translatesAutoresizingMaskIntoConstraints = false
+        sw.tag = 1
+        sw.addTarget(self, action: #selector(switchTopping(_:)), for: .valueChanged)
         return sw
     }()
     
-    let mushroomsLabel: UILabel = {
+    lazy var mushroomsLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Грибы"
+        lbl.text = mushroom
         lbl.font = .boldSystemFont(ofSize: 22)
         lbl.textColor = .darkGray
         lbl.textAlignment = .left
@@ -60,13 +70,15 @@ class PizzaDetailViewController: UIViewController {
     let mushroomsSwitch: UISwitch = {
         let sw = UISwitch()
         sw.translatesAutoresizingMaskIntoConstraints = false
+        sw.tag = 2
+        sw.addTarget(self, action: #selector(switchTopping(_:)), for: .valueChanged)
         return sw
     }()
     
-    let olivesLabel: UILabel = {
+    lazy var olivesLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.text = "Маслины"
+        lbl.text = olive
         lbl.font = .boldSystemFont(ofSize: 22)
         lbl.textColor = .darkGray
         lbl.textAlignment = .left
@@ -76,6 +88,8 @@ class PizzaDetailViewController: UIViewController {
     let olivesSwitch: UISwitch = {
         let sw = UISwitch()
         sw.translatesAutoresizingMaskIntoConstraints = false
+        sw.tag = 3
+        sw.addTarget(self, action: #selector(switchTopping(_:)), for: .valueChanged)
         return sw
     }()
     
@@ -94,8 +108,13 @@ class PizzaDetailViewController: UIViewController {
     }()
     
     init(pizzaName: String, pizzaImage: UIImage) {
-        self.pizzaName = pizzaName
+        self.pizzaName =  pizzaName
         self.pizzaImage = pizzaImage
+        self.cheese =     "Сыр мацарела"
+        self.ham =        "Ветчина"
+        self.mushroom =   "Грибы"
+        self.olive =      "Маслины"
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -107,11 +126,14 @@ class PizzaDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        setDismissBatButton()
         configure()
         addSubviews()
         setConstraints()
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"), style: .plain, target: nil, action: nil)
+    }
+    
+    func setDismissBatButton() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"), style: .plain, target: self, action: #selector(dismissVC))
     }
     
     // создание лейбла и имеджвью
@@ -177,17 +199,16 @@ class PizzaDetailViewController: UIViewController {
         pizzaImageView.topAnchor.constraint(equalTo: pizzaNameLabel.bottomAnchor, constant: 10).isActive = true
         pizzaImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         pizzaImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        pizzaImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4).isActive = true
+        // картинка пиццы будет меньше либо равна
+        pizzaImageView.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.4).isActive = true
     }
     
     func setupSwitchLabels(_ element: UIView, equalTo anotherElement: UIView, topConst: CGFloat) {
         element.topAnchor.constraint(equalTo: anotherElement.bottomAnchor, constant: topConst).isActive = true
         element.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width / 6).isActive = true
         element.widthAnchor.constraint(equalToConstant: 160).isActive = true
-        print()
         element.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
-
     func setupSwitchesConstraints() {
         cheeseSwitch.topAnchor.constraint(equalTo: cheeseLabel.topAnchor, constant: 2).isActive = true
         cheeseSwitch.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width / 6).isActive = true
@@ -203,21 +224,42 @@ class PizzaDetailViewController: UIViewController {
     }
     
     func setupButtonConstraints() {
+        // ограничение будет не менее заданного число (больше или равно)
+        chooseButton.topAnchor.constraint(greaterThanOrEqualTo: olivesLabel.bottomAnchor, constant: 15).isActive = true
         chooseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         chooseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width / 6).isActive = true
         chooseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width / 6).isActive = true
         chooseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    @objc func toOrderVC() {
-//        let vc = FoodViewController()
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true, completion: nil)
-//        navigationController?.pushViewController(vc, animated: true)
-        let navigationController = self.presentingViewController as? UINavigationController
-        self.dismiss(animated: true) {
-            let _ = navigationController?.popToRootViewController(animated: true)
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func switchTopping(_ sender: UISwitch) {
+        if sender.tag < 0 || sender.tag > 3 { return }
+        let ingredients = [cheese, ham, mushroom, olive]
+        if sender.isOn {
+            toppings.append(ingredients[sender.tag])
+        } else {
+            if let index = toppings.firstIndex(of: ingredients[sender.tag]) {
+                toppings.remove(at: index)
+            }
         }
-//        navigationController?.popToRootViewController(animated: true)
+        print(toppings)
+    }
+    
+    @objc func toOrderVC() {
+        let vc = OrderViewController(pizzaName: pizzaName, toppings: toppings)
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true, completion: nil)
+        //vc.modalPresentationStyle = .fullScreen
+        //present(vc, animated: true, completion: nil)
+        //navigationController?.pushViewController(vc, animated: true)
+        //let navigationController = self.presentingViewController as? UINavigationController
+        //self.dismiss(animated: true) {
+        //    let _ = navigationController?.popToRootViewController(animated: true)
+        //}
     }
 }
