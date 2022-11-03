@@ -33,10 +33,10 @@ class PizzaViewController: UIViewController {
         pizzaTableView.dataSource = self
         pizzaTableView.rowHeight = 150
 
-        addSubviews()
+        setPizzaTableView()
     }
     
-    func addSubviews() {
+    func setPizzaTableView() {
         view.addSubview(pizzaTableView)
         
         NSLayoutConstraint.activate(

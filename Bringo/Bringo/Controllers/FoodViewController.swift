@@ -40,7 +40,7 @@ class FoodViewController: UIViewController {
         
         setupNavigationVC()
 
-        addSubviews()
+        view.addSubviews(pizzaButton, sushiButton)
         setConstraints()
     }
     
@@ -51,11 +51,6 @@ class FoodViewController: UIViewController {
         appearance.backgroundColor = .systemGray6
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    func addSubviews() {
-        view.addSubview(pizzaButton)
-        view.addSubview(sushiButton)
     }
     
     func setConstraints() {

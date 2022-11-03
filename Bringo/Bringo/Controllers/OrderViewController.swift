@@ -91,7 +91,15 @@ class OrderViewController: UIViewController {
         
         generateOrderListLabel()
         setupNavigationVC()
-        addSubviews()
+        view.addSubviews(
+            orderLabel,
+            orderListLabel,
+            cardLabel,
+            cashLabel,
+            cardSwitch,
+            cashSwitch,
+            payButton
+        )
         setConstraints()
     }
     
@@ -109,6 +117,8 @@ class OrderViewController: UIViewController {
         orderListLabel.textAlignment = .left
         orderListLabel.numberOfLines = 0
         orderListLabel.textColor = .darkGray
+        
+        print(orderList)
     }
     
     func setupNavigationVC() {
@@ -118,16 +128,6 @@ class OrderViewController: UIViewController {
         appearance.backgroundColor = .systemGray6
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-    }
-    
-    func addSubviews() {
-        view.addSubview(orderLabel)
-        view.addSubview(orderListLabel)
-        view.addSubview(cardLabel)
-        view.addSubview(cashLabel)
-        view.addSubview(cardSwitch)
-        view.addSubview(cashSwitch)
-        view.addSubview(payButton)
     }
     
     func setConstraints() {

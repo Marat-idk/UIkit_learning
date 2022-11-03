@@ -84,18 +84,16 @@ class LoginViewConroller: UIViewController {
         telephoneNumberTextField.delegate = self
         passwordTextField.delegate = self
         
-        addSubviews()
+        view.addSubviews(
+            cloudImageView,
+            telephoneNumberLabel,
+            telephoneNumberTextField,
+            passwordLabel,
+            passwordTextField,
+            signInButton
+        )
         setConstraints()
         setupTapGestureRecognizer()
-    }
-    
-    func addSubviews() {
-        view.addSubview(cloudImageView)
-        view.addSubview(telephoneNumberLabel)
-        view.addSubview(telephoneNumberTextField)
-        view.addSubview(passwordLabel)
-        view.addSubview(passwordTextField)
-        view.addSubview(signInButton)
     }
     
     func setConstraints() {
