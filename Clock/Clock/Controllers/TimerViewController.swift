@@ -19,14 +19,20 @@ class TimerViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Отмена", for: .normal)
+        btn.setTitleColor(.gray, for: .normal)
+        btn.setTitleColor(.darkGray, for: .highlighted)
         btn.backgroundColor = .secondarySystemFill
-        btn.layer.cornerRadius = btn.frame.height / 2
         return btn
     }()
     
     let startButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Старт", for: .normal)
+        btn.setTitleColor(.gray, for: .normal)
+        btn.setTitleColor(.darkGray, for: .highlighted)
+        btn.backgroundColor = UIColor(red: 23 / 255, green: 55 / 255, blue: 26 / 255, alpha: 1)
+
         return btn
     }()
 
@@ -37,33 +43,42 @@ class TimerViewController: UIViewController {
         timerPickerView.dataSource = self
         timerPickerView.delegate = self
         
-        view.addSubviews(timerPickerView, cancelButton)
+        view.addSubviews(timerPickerView, cancelButton, startButton)
         setConstaints()
-        
-        NSLayoutConstraint.activate(
-            [
-                cancelButton.topAnchor.constraint(equalTo: timerPickerView.bottomAnchor, constant: 20),
-                cancelButton.heightAnchor.constraint(equalToConstant: 80),
-                cancelButton.widthAnchor.constraint(equalToConstant: 80),
-                cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ]
-        )
     }
     
     // округление изображения
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         cancelButton.layer.cornerRadius = cancelButton.frame.height / 2
+        startButton.layer.cornerRadius = startButton.frame.height / 2
         cancelButton.clipsToBounds = true
+        startButton.clipsToBounds = true
     }
     
     func setConstaints() {
         setPickerViewConstrains()
+        setButtonConstrains(button: cancelButton, view.leadingAnchor, constant: 20)
+        setButtonConstrains(button: startButton, view.trailingAnchor, constant: -20)
+        
+        
     }
     
     func setPickerViewConstrains() {
         timerPickerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        timerPickerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        timerPickerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+    }
+    
+    func setButtonConstrains(button: UIButton,_ horizontalAnchor: NSLayoutXAxisAnchor, constant: CGFloat) {
+        if horizontalAnchor == view.leadingAnchor {
+            button.leadingAnchor.constraint(equalTo: horizontalAnchor, constant: constant).isActive = true
+        } else {
+            button.trailingAnchor.constraint(equalTo: horizontalAnchor, constant: constant).isActive = true
+        }
+        button.topAnchor.constraint(equalTo: timerPickerView.bottomAnchor, constant: view.bounds.height / 7.5).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+
     }
 }
 
