@@ -12,3 +12,5 @@ import UIKit
 var labelColor = UIColor.black
 var labelNumberOfLines = 1
 var labelFontSize: CGFloat = 20.0
+var labelLineBreakMode: NSLineBreakMode = .byTruncatingTail
+var labelShadowOffSet = CGSize(width: 0, height: 0)

@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
         lbl.font = .systemFont(ofSize: labelFontSize)
         lbl.textAlignment = .center
         lbl.numberOfLines = labelNumberOfLines
+        lbl.shadowColor = .gray
+        lbl.shadowOffset = labelShadowOffSet
         lbl.layer.borderWidth = 1.0
         lbl.layer.cornerRadius = 7.0
         return lbl
@@ -70,10 +72,13 @@ class HomeViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
 
+    // обновление настроек для лейбла
     func updateLabelSettings() {
         label.textColor = labelColor
         label.numberOfLines = labelNumberOfLines
         label.font = .systemFont(ofSize: labelFontSize)
+        label.lineBreakMode = labelLineBreakMode
+        label.shadowOffset = labelShadowOffSet
     }
 
 }
