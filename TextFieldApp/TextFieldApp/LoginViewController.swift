@@ -109,6 +109,17 @@ class LoginViewController: UIViewController {
         tf.returnKeyType = .done
         return tf
     }()
+    
+    let signInButton: UIButton = {
+        let btn = UIButton()
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.setTitle("Войти", for: .normal)
+        btn.setTitleColor(.systemGray5, for: .highlighted)
+        btn.backgroundColor = .black
+        btn.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        btn.layer.cornerRadius = 7.0
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,9 +129,8 @@ class LoginViewController: UIViewController {
             appTitleLabel, nameLabel, nameTextField,
             surnameLabel, surnameTextField,
             usernameLabel, usernameTextField,
-            passwordLabel, passwordTextField
+            passwordLabel, passwordTextField, signInButton
         )
-        setConstraints()
         
         nameTextField.delegate = self
         surnameTextField.delegate = self
@@ -131,22 +141,26 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        setConstraints()
+        setupTapGestureRecognizer()
     }
     
     func setConstraints() {
         setupAppTitleConstraints()
         //name
         setupLoginViewsConstraints(element: nameLabel, equalTo: appTitleLabel, topConst: view.frame.height / 5.9)
-        setupLoginViewsConstraints(element: nameTextField, equalTo: nameLabel, topConst: 0, heightConst: 40)
+        setupLoginViewsConstraints(element: nameTextField, equalTo: nameLabel, topConst: 0)
         //surname
         setupLoginViewsConstraints(element: surnameLabel, equalTo: nameTextField, topConst: 20)
-        setupLoginViewsConstraints(element: surnameTextField, equalTo: surnameLabel, topConst: 0, heightConst: 40)
+        setupLoginViewsConstraints(element: surnameTextField, equalTo: surnameLabel, topConst: 0)
         //username
         setupLoginViewsConstraints(element: usernameLabel, equalTo: surnameTextField, topConst: 20)
-        setupLoginViewsConstraints(element: usernameTextField, equalTo: usernameLabel, topConst: 0, heightConst: 40)
+        setupLoginViewsConstraints(element: usernameTextField, equalTo: usernameLabel, topConst: 0)
         //password
         setupLoginViewsConstraints(element: passwordLabel, equalTo: usernameTextField, topConst: 20)
-        setupLoginViewsConstraints(element: passwordTextField, equalTo: passwordLabel, topConst: 0, heightConst: 40)
+        setupLoginViewsConstraints(element: passwordTextField, equalTo: passwordLabel, topConst: 0)
+        //button
+        setupButtonConstraint()
     }
     
     func setupAppTitleConstraints() {
@@ -159,10 +173,18 @@ class LoginViewController: UIViewController {
     func setupLoginViewsConstraints(element: UIView, equalTo: UIView, topConst: CGFloat, heightConst: CGFloat? = nil) {
         element.topAnchor.constraint(equalTo: equalTo.bottomAnchor, constant: topConst).isActive = true
         element.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width / 9).isActive = true
-        if let height = heightConst {
-            element.heightAnchor.constraint(equalToConstant: height).isActive = true
+        if element is UITextField {
+            element.heightAnchor.constraint(equalToConstant: 40).isActive = true
             element.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -view.bounds.width / 9).isActive = true
         }
+    }
+    
+    func setupButtonConstraint() {
+        signInButton.topAnchor.constraint(lessThanOrEqualTo: passwordTextField.bottomAnchor, constant: view.bounds.height / 9).isActive = true
+        signInButton.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        signInButton.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor).isActive = true
+        signInButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor).isActive = true
+        signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
@@ -187,6 +209,17 @@ class LoginViewController: UIViewController {
         self.view.frame.origin.y = 0
     }
 
+    // dismissing keyboard when tapping outside
+    func setupTapGestureRecognizer() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+        
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 
 }
 
