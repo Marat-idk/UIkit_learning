@@ -212,7 +212,6 @@ class LoginViewController: UIViewController {
     // dismissing keyboard when tapping outside
     func setupTapGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
         
     }
