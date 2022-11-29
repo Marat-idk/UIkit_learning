@@ -11,6 +11,8 @@ protocol MainViewControllerDelegate: AnyObject {
     func updateFontSize(fontSize: CGFloat)
     func updateFontWeight(fontWeight: UIFont.Weight)
     func updateBackgroundColor(background: UIColor, textColor: UIColor)
+    func updateFont(font: UIFont)
+    func updateDarkMode(mode: UIUserInterfaceStyle)
 }
 
 class MainViewController: UIViewController {
@@ -24,13 +26,16 @@ class MainViewController: UIViewController {
         tv.isEditable = false
         // чтобы текст в скролл вью не был под navigation bar
         tv.contentInsetAdjustmentBehavior = .never
+        // отступы содержимого текст вью
         tv.textContainerInset = UIEdgeInsets(top: 10, left: 5, bottom: 20, right: 5)
+        // преобразование адресов сайтов в ссылки
+        tv.dataDetectorTypes = .link
         return tv
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         setupNavigationController()
         
@@ -58,17 +63,36 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         // navigationBar buttons
-        let settingsButton = UIBarButtonItem(image: UIImage(systemName: "textformat.size"), style: .plain, target: self, action: #selector(showPopoverSettingsVC(barButton:)))
-        let searchButton = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: nil, action: nil)
-        let bookmarkButton = UIBarButtonItem(image: UIImage(systemName: "bookmark"), style: .plain, target: nil, action: nil)
+        let settingsButton = UIBarButtonItem(
+                                image: UIImage(systemName: "textformat.size"),
+                                style: .plain,
+                                target: self,
+                                action: #selector(showPopoverSettingsVC(barButton:))
+                            )
+        
+        let searchButton = UIBarButtonItem(
+                                image: UIImage(systemName: "magnifyingglass"),
+                                style: .plain,
+                                target: nil,
+                                action: nil
+                            )
+        
+        let bookmarkButton = UIBarButtonItem(
+                                image: UIImage(systemName: "bookmark"),
+                                style: .plain,
+                                target: nil,
+                                action: nil
+                            )
         
         navigationItem.rightBarButtonItems = [bookmarkButton, searchButton, settingsButton]
     }
     
     @objc func showPopoverSettingsVC(barButton: UIBarButtonItem) {
         let settingsVC = SettingsViewController(
-                                        fontSize: bookTextView.font?.pointSize ?? 14,
-                                        fontWeight: bookTextView.font?.weight ?? .regular
+                                        font: bookTextView.font ?? .systemFont(ofSize: 14),
+                                        withSize: bookTextView.font?.pointSize ?? 14,
+                                        andWeight: bookTextView.font?.weight ?? .regular,
+                                        isDarkMode: overrideUserInterfaceStyle == .dark
                                         )
         settingsVC.delegate = self
         settingsVC.modalPresentationStyle = .popover
@@ -83,7 +107,6 @@ class MainViewController: UIViewController {
         
         self.present(settingsVC, animated: true, completion: nil)
     }
-    
 }
 
 extension MainViewController: UIPopoverPresentationControllerDelegate {
@@ -93,6 +116,8 @@ extension MainViewController: UIPopoverPresentationControllerDelegate {
     }
 }
 
+
+// updating settings
 extension MainViewController: MainViewControllerDelegate {
     func updateFontSize(fontSize: CGFloat) {
         bookTextView.font = bookTextView.font?.withSize(fontSize)
@@ -106,8 +131,17 @@ extension MainViewController: MainViewControllerDelegate {
     
     func updateBackgroundColor(background: UIColor, textColor: UIColor) {
         bookTextView.backgroundColor = background
-        view.backgroundColor = background
         bookTextView.textColor = textColor
         navigationController?.navigationBar.tintColor = textColor == .lightGray ? .darkGray : textColor
+    }
+    
+    func updateFont(font: UIFont) {
+        bookTextView.font = font
+    }
+    
+    func updateDarkMode(mode: UIUserInterfaceStyle) {
+        overrideUserInterfaceStyle = mode
+        navigationController?.navigationBar.overrideUserInterfaceStyle = mode
+        bookTextView.overrideUserInterfaceStyle = mode
     }
 }

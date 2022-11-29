@@ -41,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D268278529359B29006D3247 /* Conrollers */ = {
+			isa = PBXGroup;
+			children = (
+				D288AFFF292D5BF900CE257D /* MainViewController.swift */,
+				D268278129323DE2006D3247 /* SettingsViewController.swift */,
+			);
+			path = Conrollers;
+			sourceTree = "<group>";
+		};
 		D288AFEF292D5BF900CE257D = {
 			isa = PBXGroup;
 			children = (
@@ -62,8 +71,7 @@
 			children = (
 				D288AFFB292D5BF900CE257D /* AppDelegate.swift */,
 				D288AFFD292D5BF900CE257D /* SceneDelegate.swift */,
-				D288AFFF292D5BF900CE257D /* MainViewController.swift */,
-				D268278129323DE2006D3247 /* SettingsViewController.swift */,
+				D268278529359B29006D3247 /* Conrollers */,
 				D268277F29317D69006D3247 /* Model.swift */,
 				D268278329326D03006D3247 /* UIExtensions.swift */,
 				D288B004292D5C0200CE257D /* Assets.xcassets */,

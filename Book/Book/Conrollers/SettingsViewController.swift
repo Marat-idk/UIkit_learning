@@ -9,11 +9,19 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
+    // текущий размер шрифта
     private var fontSize: CGFloat
     private let fontWeights = [UIFont.Weight.regular, UIFont.Weight.bold]
     // текущая ширина шрифта
     private var fontWeight: UIFont.Weight
-    private lazy var font: UIFont = .systemFont(ofSize: fontSize)
+    
+    private lazy var fonts: [UIFont?] = [
+        .systemFont(ofSize: fontSize),
+        .italicSystemFont(ofSize: fontSize),
+        UIFont(name: "SnellRoundhand", size: fontSize)]
+    // текущий шрифт
+    private var font: UIFont
+    private var isDarkMode: Bool
     
     var delegate: MainViewControllerDelegate?
     
@@ -70,7 +78,6 @@ class SettingsViewController: UIViewController {
     let whiteModeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 0
         btn.backgroundColor = .white
         btn.layer.borderWidth = 1.0
         btn.layer.borderColor = UIColor.black.cgColor
@@ -81,7 +88,6 @@ class SettingsViewController: UIViewController {
     let brownModeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 1
         btn.backgroundColor = .systemBrown
         btn.layer.borderWidth = 1.0
         btn.layer.borderColor = UIColor.brown.cgColor
@@ -92,7 +98,6 @@ class SettingsViewController: UIViewController {
     let grayModeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 2
         btn.backgroundColor = .darkGray
         btn.layer.borderWidth = 1.0
         btn.layer.borderColor = UIColor.lightGray.cgColor
@@ -103,7 +108,6 @@ class SettingsViewController: UIViewController {
     let blackModeButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 3
         btn.backgroundColor = .black
         btn.layer.borderWidth = 1.0
         btn.layer.borderColor = UIColor.white.cgColor
@@ -115,6 +119,7 @@ class SettingsViewController: UIViewController {
         let sv = UIStackView()
         sv.translatesAutoresizingMaskIntoConstraints = false
         sv.axis = .horizontal
+        sv.alignment = .fill
         sv.distribution = .fillEqually
         sv.spacing = 15
         sv.addArrangedSubviews(
@@ -123,13 +128,38 @@ class SettingsViewController: UIViewController {
             grayModeButton,
             blackModeButton
         )
-        
         return sv
     }()
     
-    init(fontSize: CGFloat, fontWeight: UIFont.Weight) {
-        self.fontSize = fontSize
-        self.fontWeight = fontWeight
+    lazy var fontPickerView: UIPickerView = {
+        let pv = UIPickerView()
+        pv.translatesAutoresizingMaskIntoConstraints = false
+        return pv
+    }()
+    
+    let darkModeLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Dark mode"
+        lbl.font = .systemFont(ofSize: 20)
+        lbl.textColor = .label
+        lbl.textAlignment = .left
+        return lbl
+    }()
+    
+    lazy var darkModeSwitch: UISwitch = {
+        let sw = UISwitch()
+        sw.translatesAutoresizingMaskIntoConstraints = false
+        sw.isOn = isDarkMode
+        sw.addTarget(self, action: #selector(updateDarkMode(_:)), for: .valueChanged)
+        return sw
+    }()
+    
+    init(font: UIFont, withSize size: CGFloat, andWeight weight: UIFont.Weight, isDarkMode: Bool) {
+        self.font = font
+        self.fontSize = size
+        self.fontWeight = weight
+        self.isDarkMode = isDarkMode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -140,17 +170,26 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        overrideUserInterfaceStyle = isDarkMode ? .dark : .light
+        fontPickerView.dataSource = self
+        fontPickerView.delegate = self
         
         view.addSubviews(fontSizeSlider, minusImageView, plusImageView,
-                         weightSegmentedController, stackView)
-        
+                         weightSegmentedController, stackView, fontPickerView,
+                         darkModeLabel, darkModeSwitch)
         setupConstraints()
+        
+        // устанавливаем значение по умолчанию для пикера
+        fontPickerView.selectRow(fonts.firstIndex(of: font) ?? 0, inComponent: 0, animated: true)
     }
     
     func setupConstraints() {
         setupSliderConstraint()
         setupSegmentedControllerConstraint()
         setupStackViewConstraints()
+        setupFontPickerViewConstraints()
+        setupDarkModeLabelConstraints()
+        setupDarkModeSwitchConstraints()
     }
     
     func setupSliderConstraint() {
@@ -182,25 +221,53 @@ class SettingsViewController: UIViewController {
         stackView.heightAnchor.constraint(equalToConstant: 45).isActive = true
     }
     
+    func setupFontPickerViewConstraints() {
+        fontPickerView.topAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+        fontPickerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+    }
+    
+    func setupDarkModeLabelConstraints() {
+        darkModeLabel.topAnchor.constraint(equalTo: fontPickerView.bottomAnchor).isActive = true
+        darkModeLabel.leadingAnchor.constraint(equalTo: weightSegmentedController.leadingAnchor).isActive = true
+    }
+    
+    func setupDarkModeSwitchConstraints() {
+        darkModeSwitch.topAnchor.constraint(equalTo: fontPickerView.bottomAnchor).isActive = true
+        darkModeSwitch.trailingAnchor.constraint(equalTo: weightSegmentedController.trailingAnchor).isActive = true
+    }
+    
     @objc func updateFontSize(_ slider: UISlider) {
-        delegate?.updateFontSize(fontSize: CGFloat(slider.value))
+        fontSize = CGFloat(slider.value)
+        delegate?.updateFontSize(fontSize: fontSize)
     }
     
     // weight доступно только для .systemFont
     @objc func updateFontWeight(_ segmentedController: UISegmentedControl) {
+        if font != .systemFont(ofSize: fontSize) {
+            segmentedController.reset()
+            return
+        }
         let weight = fontWeights[segmentedController.selectedSegmentIndex]
         delegate?.updateFontWeight(fontWeight: weight)
     }
     
     @objc func updateBackgroundColor(_ button: UIButton) {
-        guard let backgroundColor = button.backgroundColor else { return }
-        let textColor = getTextColor(backgroundColor)
-        delegate?.updateBackgroundColor(background: backgroundColor, textColor: textColor)
+        guard let color = button.backgroundColor else { return }
+        let textColor = getTextColor(color.resolvedColor(with: view.traitCollection), traits: view.traitCollection)
+        delegate?.updateBackgroundColor(background: color, textColor: textColor)
     }
     
-    func getTextColor(_ background: UIColor) -> UIColor {
+    @objc func updateDarkMode(_ sw: UISwitch) {
+        isDarkMode = sw.isOn
+        let mode: UIUserInterfaceStyle = isDarkMode ? .dark : .light
+        self.overrideUserInterfaceStyle = mode
+        delegate?.updateDarkMode(mode: mode)
+//        delegate?.updateBackgroundColor(background: isDarkMode ? .black : .white, textColor: isDarkMode ? .white : .black)
+    }
+    
+    func getTextColor(_ background: UIColor, traits: UITraitCollection) -> UIColor {
         switch background {
-        case .white, .brown:
+        case .white, .systemBrown.resolvedColor(with: traits):
             return .black
         case .darkGray:
             return .lightGray
@@ -217,5 +284,28 @@ class SettingsViewController: UIViewController {
         brownModeButton.layer.cornerRadius = whiteModeButton.frame.width / 2
         grayModeButton.layer.cornerRadius = whiteModeButton.frame.width / 2
         blackModeButton.layer.cornerRadius = whiteModeButton.frame.width / 2
+    }
+}
+
+extension SettingsViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return fonts.count
+    }
+}
+
+extension SettingsViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return fonts[row]?.fontName ?? "unknown"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let tempFont = fonts[row] else { return }
+        font = tempFont.withSize(fontSize)
+        weightSegmentedController.reset()
+        delegate?.updateFont(font: font)
     }
 }

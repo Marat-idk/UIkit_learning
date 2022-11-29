@@ -18,6 +18,15 @@ extension UIView {
     }
 }
 
+extension UIStackView {
+    func addArrangedSubviews(_ views: [UIView]) {
+        views.forEach { self.addArrangedSubview($0) }
+    }
+    func addArrangedSubviews(_ views: UIView...) {
+        views.forEach { self.addArrangedSubview($0) }
+    }
+}
+
 extension UIFont.Weight {
     var description: String {
         switch self {
@@ -35,6 +44,7 @@ extension UIFont.Weight {
     }
 }
 
+// получение ширины фона
 extension UIFont {
     var weight: UIFont.Weight {
         guard let weightNumber = traits[.weight] as? NSNumber else { return .regular }
@@ -49,12 +59,14 @@ extension UIFont {
     }
 }
 
-
-extension UIStackView {
-    func addArrangedSubviews(_ views: [UIView]) {
-        views.forEach { self.addArrangedSubview($0) }
-    }
-    func addArrangedSubviews(_ views: UIView...) {
-        views.forEach { self.addArrangedSubview($0) }
+extension UISegmentedControl {
+    // сброс выбранного сегмента до первого (дефолтного в моем случае)
+    func reset() {
+        if selectedSegmentIndex == 0 {
+            return
+        }
+        UIView.animate(withDuration: 0.25) {
+            self.selectedSegmentIndex = 0
+        }
     }
 }
