@@ -2,12 +2,14 @@
 //  ViewController.swift
 //  Clock
 //
-//  Created by Maxim Raskevich on 31.10.2022.
+//  Created by Marat on 31.10.2022.
 //
 
 import UIKit
 
 class TimerViewController: UIViewController {
+    
+    private let buttonWidth: CGFloat = 85.0
     
     let timerPickerView: UIPickerView = {
         let pv = UIPickerView()
@@ -45,23 +47,14 @@ class TimerViewController: UIViewController {
         
         view.addSubviews(timerPickerView, cancelButton, startButton)
         setConstaints()
-    }
-    
-    // округление изображения
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        cancelButton.layer.cornerRadius = cancelButton.frame.height / 2
-        startButton.layer.cornerRadius = startButton.frame.height / 2
-        cancelButton.clipsToBounds = true
-        startButton.clipsToBounds = true
+        cancelButton.addCircle(width: buttonWidth , height: buttonWidth)
+        startButton.addCircle(width: buttonWidth, height: buttonWidth)
     }
     
     func setConstaints() {
         setPickerViewConstrains()
         setButtonConstrains(button: cancelButton, view.leadingAnchor, constant: 20)
         setButtonConstrains(button: startButton, view.trailingAnchor, constant: -20)
-        
-        
     }
     
     func setPickerViewConstrains() {
@@ -75,10 +68,18 @@ class TimerViewController: UIViewController {
         } else {
             button.trailingAnchor.constraint(equalTo: horizontalAnchor, constant: constant).isActive = true
         }
-        button.topAnchor.constraint(equalTo: timerPickerView.bottomAnchor, constant: view.bounds.height / 7.5).isActive = true
-        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
-
+        button.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 20).isActive = true
+        button.heightAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+        button.widthAnchor.constraint(equalToConstant: buttonWidth).isActive = true
+    }
+    
+    // округление кнопок
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cancelButton.layer.cornerRadius = cancelButton.frame.height / 2
+        startButton.layer.cornerRadius = startButton.frame.height / 2
+        cancelButton.clipsToBounds = true
+        startButton.clipsToBounds = true
     }
 }
 
