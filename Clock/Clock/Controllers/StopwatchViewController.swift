@@ -2,7 +2,7 @@
 //  StopwatchViewController.swift
 //  Clock
 //
-//  Created by Maraton 31.10.2022.
+//  Created by Marat on 31.10.2022.
 //
 
 import UIKit
@@ -35,8 +35,10 @@ class StopwatchViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Круг", for: .normal)
-        btn.setTitleColor(.gray, for: .normal)
-        btn.backgroundColor = .secondarySystemFill
+        btn.setTitleColor(UIColor.inActiveLapButtonTextColor, for: .normal)
+        btn.setTitleColor(.darkGray, for: .highlighted)
+        btn.backgroundColor = UIColor.inActiveLapButtonBackground
+        btn.addTarget(self, action: #selector(lapButtonTapped(_:)), for: .touchUpInside)
         return btn
     }()
     
@@ -44,8 +46,9 @@ class StopwatchViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Старт", for: .normal)
-        btn.setTitleColor(.gray, for: .normal)
-        btn.backgroundColor = UIColor(red: 23 / 255, green: 55 / 255, blue: 26 / 255, alpha: 1)
+        btn.setTitleColor(UIColor.unselectedStartButtonTextColor, for: .normal)
+        //btn.setTitleColor(.systemGreen, for: .highlighted)
+        btn.backgroundColor = UIColor.unselectedStartButtonBackground
         btn.addTarget(self, action: #selector(startButtonTapped(_:)), for: .touchUpInside)
         return btn
     }()
@@ -93,26 +96,47 @@ class StopwatchViewController: UIViewController {
         startButton.clipsToBounds = true
     }
     
+    @objc func lapButtonTapped(_ button: UIButton) {
+        if !startButton.isSelected {
+            if decisecondCounter == 0 {
+                return
+            } else {
+                decisecondCounter = 0
+                stopwatchText = "00:00,00"
+                lapButton.setTitleColor(UIColor.inActiveLapButtonTextColor, for: .normal)
+                lapButton.backgroundColor = UIColor.inActiveLapButtonBackground
+            }
+        }
+    }
+    
     @objc func startButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
         if button.isSelected {
             button.setTitle("Стоп", for: .normal)
-            button.setTitleColor(.red, for: .normal)
-            button.backgroundColor = .systemRed
+            button.setTitleColor(UIColor.selectedStartButtonTextColor, for: .normal)
+            button.backgroundColor = UIColor.selectedStartButtonBackground
             stopwatch = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateTimer(_:)), userInfo: nil, repeats: true)
+            lapButton.setTitle("Круг", for: .normal)
         } else {
             button.setTitle("Старт", for: .normal)
-            button.setTitleColor(.gray, for: .normal)
-            button.backgroundColor = UIColor(red: 23 / 255, green: 55 / 255, blue: 26 / 255, alpha: 1)
+            button.setTitleColor(UIColor.unselectedStartButtonTextColor, for: .normal)
+            button.backgroundColor = UIColor.unselectedStartButtonBackground
+            // остановка таймера
             stopwatch.invalidate()
+            if(decisecondCounter != 0) {
+                lapButton.setTitle("Сброс", for: .normal)
+            }
         }
+        lapButton.setTitleColor(UIColor.activeLapButtonTextColor, for: .normal)
+        lapButton.backgroundColor = UIColor.activeLapButtonBackground
     }
     
+    // обновление таймера, подсчет времени и изменение текста лейбла
     @objc func updateTimer(_ timer: Timer) {
         decisecondCounter += 0.01
         
         let timeInSeconds = Int(decisecondCounter)
-        let minutes = timeInSeconds / 60
+        let minutes = timeInSeconds % 3600 / 60
         let seconds = timeInSeconds % 60
         let deciseconds = decisecondCounter - Double(timeInSeconds)
     
@@ -120,7 +144,7 @@ class StopwatchViewController: UIViewController {
         let secondsStr = String(format: "%02d", seconds)
         let decisecondsStr = String(format: "%.2f", deciseconds).components(separatedBy: ".").last ?? "00"
         
-        stopwatchText = "\(minunesStr):\(secondsStr).\(decisecondsStr)"
+        stopwatchText = "\(minunesStr):\(secondsStr),\(decisecondsStr)"
     }
     
 }

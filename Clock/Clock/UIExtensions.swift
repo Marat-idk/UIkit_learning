@@ -37,3 +37,62 @@ extension UIView {
         self.layer.addSublayer(circleLayer)
     }
 }
+
+
+extension UIColor {
+    static var unselectedStartButtonBackground: UIColor {
+        return hexStringToUIColor(hex: "092A11")
+    }
+    // аналогичен .systemGreen
+    static var unselectedStartButtonTextColor: UIColor {
+        return hexStringToUIColor(hex: "2ECA55")
+    }
+    
+    static var selectedStartButtonBackground: UIColor {
+        return hexStringToUIColor(hex: "330E0B")
+    }
+    
+    static var selectedStartButtonTextColor: UIColor {
+        return hexStringToUIColor(hex: "D73B30")
+    }
+    
+    static var inActiveLapButtonBackground: UIColor {
+        return hexStringToUIColor(hex: "1C1C1E")
+    }
+    
+    static var inActiveLapButtonTextColor: UIColor {
+        return .lightGray
+    }
+    
+    static var activeLapButtonBackground: UIColor {
+        return hexStringToUIColor(hex: "333333")
+    }
+    
+    static var activeLapButtonTextColor: UIColor {
+        return hexStringToUIColor(hex: "F9F9F9")
+    }
+    
+    
+    // hex to UIColor
+    static func hexStringToUIColor (hex: String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+}

@@ -21,9 +21,9 @@ class TimerViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Отмена", for: .normal)
-        btn.setTitleColor(.gray, for: .normal)
+        btn.setTitleColor(UIColor.inActiveLapButtonTextColor, for: .normal)
         btn.setTitleColor(.darkGray, for: .highlighted)
-        btn.backgroundColor = .secondarySystemFill
+        btn.backgroundColor = UIColor.inActiveLapButtonBackground
         return btn
     }()
     
@@ -31,9 +31,9 @@ class TimerViewController: UIViewController {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Старт", for: .normal)
-        btn.setTitleColor(.gray, for: .normal)
-        btn.setTitleColor(.darkGray, for: .highlighted)
-        btn.backgroundColor = UIColor(red: 23 / 255, green: 55 / 255, blue: 26 / 255, alpha: 1)
+        btn.setTitleColor(UIColor.unselectedStartButtonTextColor, for: .normal)
+        btn.setTitleColor(.green, for: .highlighted)
+        btn.backgroundColor = UIColor.unselectedStartButtonBackground
 
         return btn
     }()
@@ -125,7 +125,7 @@ extension TimerViewController: UIPickerViewDelegate {
         }
     }
     
-    // при выборе row,
+    // при выборе row, перезагружаем пикер
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.reloadComponent(component)
     }
