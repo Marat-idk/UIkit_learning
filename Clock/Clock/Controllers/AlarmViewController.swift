@@ -8,8 +8,6 @@
 import UIKit
 
 class AlarmViewController: UIViewController {
-    let cellID = "cellID"
-    
     
     var alarmsTime: [String] = []
     
@@ -67,7 +65,7 @@ class AlarmViewController: UIViewController {
             [
                 alarmTableView.topAnchor.constraint(equalTo: view.topAnchor),
                 alarmTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                alarmTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: navigationController!.navigationBar.layoutMargins.left),
+                alarmTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 alarmTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ]
         )

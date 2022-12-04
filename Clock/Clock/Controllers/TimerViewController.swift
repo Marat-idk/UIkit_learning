@@ -47,6 +47,7 @@ class TimerViewController: UIViewController {
         
         view.addSubviews(timerPickerView, cancelButton, startButton)
         setConstaints()
+        // добавляем окружности внутри кнопок
         cancelButton.addCircle(width: buttonWidth , height: buttonWidth)
         startButton.addCircle(width: buttonWidth, height: buttonWidth)
     }

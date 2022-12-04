@@ -18,6 +18,7 @@
 		D23D5E62290F80A5003035E7 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23D5E61290F80A5003035E7 /* StopwatchViewController.swift */; };
 		D23D5E6429151ECC003035E7 /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23D5E6329151ECC003035E7 /* AlarmTableViewCell.swift */; };
 		D23D5E672916DEA5003035E7 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23D5E662916DEA5003035E7 /* UIExtensions.swift */; };
+		D24078F6293BA24300FE70E7 /* StopwatchLapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24078F5293BA24300FE70E7 /* StopwatchLapCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		D23D5E61290F80A5003035E7 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		D23D5E6329151ECC003035E7 /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 		D23D5E662916DEA5003035E7 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		D24078F5293BA24300FE70E7 /* StopwatchLapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchLapCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				D23D5E5D290F7F86003035E7 /* AlarmViewController.swift */,
 				D23D5E6329151ECC003035E7 /* AlarmTableViewCell.swift */,
 				D23D5E61290F80A5003035E7 /* StopwatchViewController.swift */,
+				D24078F5293BA24300FE70E7 /* StopwatchLapCell.swift */,
 				D23D5E4B290F7AFB003035E7 /* TimerViewController.swift */,
 			);
 			path = Controllers;
@@ -163,6 +166,7 @@
 				D23D5E60290F806B003035E7 /* WorldClockViewController.swift in Sources */,
 				D23D5E5E290F7F86003035E7 /* AlarmViewController.swift in Sources */,
 				D23D5E4C290F7AFB003035E7 /* TimerViewController.swift in Sources */,
+				D24078F6293BA24300FE70E7 /* StopwatchLapCell.swift in Sources */,
 				D23D5E672916DEA5003035E7 /* UIExtensions.swift in Sources */,
 				D23D5E6429151ECC003035E7 /* AlarmTableViewCell.swift in Sources */,
 				D23D5E48290F7AFB003035E7 /* AppDelegate.swift in Sources */,
