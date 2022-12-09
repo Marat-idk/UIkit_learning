@@ -16,6 +16,10 @@
 		D2030F3F294275E900F7E089 /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F3E294275E900F7E089 /* ForYouViewController.swift */; };
 		D2030F412942760500F7E089 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F402942760500F7E089 /* SearchViewController.swift */; };
 		D2030F432942763800F7E089 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F422942763800F7E089 /* CartViewController.swift */; };
+		D2030F46294283DA00F7E089 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F45294283DA00F7E089 /* UIExtensions.swift */; };
+		D2030F4929433FEC00F7E089 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4829433FEC00F7E089 /* Product.swift */; };
+		D2030F502943544500F7E089 /* RecentlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */; };
+		D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		D2030F3E294275E900F7E089 /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
 		D2030F402942760500F7E089 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D2030F422942763800F7E089 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		D2030F45294283DA00F7E089 /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		D2030F4829433FEC00F7E089 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionView.swift; sourceTree = "<group>"; };
+		D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +72,11 @@
 			children = (
 				D2030F26293E91E700F7E089 /* AppDelegate.swift */,
 				D2030F28293E91E700F7E089 /* SceneDelegate.swift */,
+				D2030F4729433FB700F7E089 /* Model */,
+				D2030F4C294341FA00F7E089 /* View */,
 				D2030F4429427E8300F7E089 /* Controllers */,
 				D2030F2F293E91EB00F7E089 /* Assets.xcassets */,
+				D2030F45294283DA00F7E089 /* UIExtensions.swift */,
 				D2030F31293E91EC00F7E089 /* LaunchScreen.storyboard */,
 				D2030F34293E91EC00F7E089 /* Info.plist */,
 			);
@@ -82,6 +93,23 @@
 				D2030F422942763800F7E089 /* CartViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D2030F4729433FB700F7E089 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2030F4829433FEC00F7E089 /* Product.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D2030F4C294341FA00F7E089 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */,
+				D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,8 +183,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2030F412942760500F7E089 /* SearchViewController.swift in Sources */,
+				D2030F502943544500F7E089 /* RecentlyCollectionView.swift in Sources */,
 				D2030F3D294275A600F7E089 /* BuyViewController.swift in Sources */,
+				D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */,
+				D2030F4929433FEC00F7E089 /* Product.swift in Sources */,
 				D2030F3F294275E900F7E089 /* ForYouViewController.swift in Sources */,
+				D2030F46294283DA00F7E089 /* UIExtensions.swift in Sources */,
 				D2030F432942763800F7E089 /* CartViewController.swift in Sources */,
 				D2030F27293E91E700F7E089 /* AppDelegate.swift in Sources */,
 				D2030F3B29426FBE00F7E089 /* MainTabBarController.swift in Sources */,
