@@ -10,6 +10,7 @@ import UIKit
 class RecentlyCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     private var products: [Product] = []
+    weak var productDelegate: ProductDelegate?
     
     init() {
         let layout = UICollectionViewFlowLayout()
@@ -20,7 +21,6 @@ class RecentlyCollectionView: UICollectionView, UICollectionViewDataSource, UICo
         dataSource = self
         delegate = self
         register(RecentlyCollectionViewCell.self, forCellWithReuseIdentifier: RecentlyCollectionViewCell.identifier)
-        print(RecentlyCollectionViewCell.identifier)
         translatesAutoresizingMaskIntoConstraints = false
         // расстояние между ячейками
         layout.minimumLineSpacing = 10
@@ -50,7 +50,7 @@ class RecentlyCollectionView: UICollectionView, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: RecentlyCollectionViewCell.identifier, for: indexPath) as! RecentlyCollectionViewCell
         
-        if products.isEmpty { return cell}
+        if products.isEmpty { return cell }
         
         let product = products[indexPath.row]
         
@@ -62,8 +62,14 @@ class RecentlyCollectionView: UICollectionView, UICollectionViewDataSource, UICo
         return cell
     }
 
-    // UICollectionViewDelegateFlowLayout -   отвечает за размер ячеек
+    // UICollectionViewDelegateFlowLayout - отвечает за размер ячеек
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width / 2.76, height: frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Selected row = \(indexPath.row) and item = \(indexPath.item)")
+        let product = products[indexPath.row]
+        productDelegate?.toProductVC(product: product)
     }
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProductDelegate: AnyObject {
+    func toProductVC(product: Product)
+}
+
 class SearchViewController: UIViewController {
     
     private var products: [Product]?
@@ -35,7 +39,19 @@ class SearchViewController: UIViewController {
         return btn
     }()
     
+    private let recentlyRequestsLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Варианты запросов"
+        lbl.textColor = .white
+        lbl.font = .boldSystemFont(ofSize: 22)
+        lbl.textAlignment = .left
+        lbl.adjustsFontSizeToFitWidth = true
+        return lbl
+    }()
+    
     private let recentlyWatchedCollView = RecentlyCollectionView()
+    private var recentlyRequestsStackView: UIStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +59,15 @@ class SearchViewController: UIViewController {
 
         setupNavigationController()
         setupSearchController()
+        setupStackView()
         
         view.addSubviews(recentlyWatchedLabel, recentlyClearButton,
-                         recentlyWatchedCollView)
+                         recentlyWatchedCollView, recentlyRequestsLabel, recentlyRequestsStackView)
         setupConstraints()
         
         products = Product.fetchData()
         recentlyWatchedCollView.set(cells: products)
+        recentlyWatchedCollView.productDelegate = self
     }
 
     private func setupNavigationController() {
@@ -66,10 +84,35 @@ class SearchViewController: UIViewController {
         definesPresentationContext = true
     }
     
+    private func setupStackView() {
+        recentlyRequestsStackView = UIStackView()
+        recentlyRequestsStackView.translatesAutoresizingMaskIntoConstraints = false
+        recentlyRequestsStackView.axis = .vertical
+        recentlyRequestsStackView.alignment = .leading
+        recentlyRequestsStackView.distribution = .fillEqually
+        recentlyRequestsStackView.spacing = 15
+        
+        let searches = ["AirPods", "AppleCare", "Beats", "Сравните моделей iPhone"]
+        for i in 0...3 {
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+            button.tintColor = .lightGray
+            button.setTitle(" \(searches[i])", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.setTitleColor(.lightGray, for: .highlighted)
+            button.titleLabel?.font = .systemFont(ofSize: 22)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            
+            recentlyRequestsStackView.addArrangedSubview(button)
+        }
+    }
+    
     private func setupConstraints() {
         setupRWLabelConstraints()
         setupRecentlyClearButtonConstraints()
         setupRecentlyWatchedCollConstraints()
+        setupRecentlyRequestsLabel()
+        setupRecentlyRequestStackView()
     }
     
     private func setupRWLabelConstraints() {
@@ -91,5 +134,23 @@ class SearchViewController: UIViewController {
         recentlyWatchedCollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.22).isActive = true
     }
     
+    private func setupRecentlyRequestsLabel() {
+        recentlyRequestsLabel.topAnchor.constraint(equalTo: recentlyWatchedCollView.bottomAnchor, constant: 20).isActive = true
+        recentlyRequestsLabel.leadingAnchor.constraint(equalTo: recentlyWatchedLabel.leadingAnchor).isActive = true
+        recentlyRequestsLabel.trailingAnchor.constraint(equalTo: recentlyClearButton.trailingAnchor).isActive = true
+    }
     
+    private func setupRecentlyRequestStackView() {
+        recentlyRequestsStackView.topAnchor.constraint(equalTo: recentlyRequestsLabel.bottomAnchor, constant: 20).isActive = true
+        recentlyRequestsStackView.leadingAnchor.constraint(equalTo: recentlyRequestsLabel.leadingAnchor).isActive = true
+        recentlyRequestsStackView.trailingAnchor.constraint(equalTo: recentlyRequestsLabel.trailingAnchor).isActive = true
+        recentlyRequestsStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+}
+
+extension SearchViewController: ProductDelegate {
+    func toProductVC(product: Product) {
+        let productVC = ProductViewController(product: product)
+        navigationController?.pushViewController(productVC, animated: true)
+    }
 }

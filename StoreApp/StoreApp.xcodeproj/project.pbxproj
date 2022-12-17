@@ -20,6 +20,7 @@
 		D2030F4929433FEC00F7E089 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4829433FEC00F7E089 /* Product.swift */; };
 		D2030F502943544500F7E089 /* RecentlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */; };
 		D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */; };
+		D21EAAB2294DCF36002DF113 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB1294DCF36002DF113 /* ProductViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D2030F4829433FEC00F7E089 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionView.swift; sourceTree = "<group>"; };
 		D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		D21EAAB1294DCF36002DF113 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				D2030F3C294275A600F7E089 /* BuyViewController.swift */,
 				D2030F3E294275E900F7E089 /* ForYouViewController.swift */,
 				D2030F402942760500F7E089 /* SearchViewController.swift */,
+				D21EAAB1294DCF36002DF113 /* ProductViewController.swift */,
 				D2030F422942763800F7E089 /* CartViewController.swift */,
 			);
 			path = Controllers;
@@ -188,6 +191,7 @@
 				D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */,
 				D2030F4929433FEC00F7E089 /* Product.swift in Sources */,
 				D2030F3F294275E900F7E089 /* ForYouViewController.swift in Sources */,
+				D21EAAB2294DCF36002DF113 /* ProductViewController.swift in Sources */,
 				D2030F46294283DA00F7E089 /* UIExtensions.swift in Sources */,
 				D2030F432942763800F7E089 /* CartViewController.swift in Sources */,
 				D2030F27293E91E700F7E089 /* AppDelegate.swift in Sources */,
@@ -339,8 +343,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -368,8 +372,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
