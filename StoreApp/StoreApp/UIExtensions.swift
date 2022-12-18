@@ -20,21 +20,11 @@ extension UIView {
 
 
 extension UIStackView {
-    func insertSeparator(color: UIColor) {
-        let separator = UIView()
-        separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.backgroundColor = color
-    
-        self.addArrangedSubview(separator)
-        
-        NSLayoutConstraint.activate(
-            [
-                separator.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-                separator.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-                separator.heightAnchor.constraint(equalToConstant: 1.0)
-            ]
-        )
-        
+    func addArrangedSubviews(_ views: [UIView]) {
+        views.forEach { addArrangedSubview($0) }
     }
     
+    func addArrangedSubviews(_ views: UIView...) {
+        views.forEach { addArrangedSubview($0) }
+    }
 }
