@@ -13,13 +13,15 @@ class Product {
     var images: [UIImage?]
     var price: Double
     var colors: [UIColor]
+    var link: URL?
     var isFavorite = false
     
-    init(name: String, images: [UIImage?], price: Double, colors: [UIColor]) {
+    init(name: String, images: [UIImage?], price: Double, colors: [UIColor], link: URL?) {
         self.name = name
         self.images = images
         self.price = price
         self.colors = colors
+        self.link = link
     }
     
     static func fetchData() -> [Product]? {
@@ -31,11 +33,12 @@ class Product {
                     UIImage(named: "backpack_2"),
                     UIImage(named: "backpack_3")
                 ],
-                price: 8792.00,
+                price: 10990.00,
                 colors: [
                     .gray,
                     .black
-                ]
+                ],
+                link: URL(string: "https://re-store.ru/catalog/P705.701/")
             ),
             Product(
                 name: "Спортивный ремешок для Apple Watch 44 мм, Black Unity",
@@ -44,11 +47,12 @@ class Product {
                     UIImage(named: "sportStrap_2"),
                     UIImage(named: "sportStrap_3")
                 ],
-                price: 3990.00,
+                price: 4990.00,
                 colors: [
                     .red,
                     .black
-                ]
+                ],
+                link: URL(string: "https://re-store.ru/catalog/MJ4W3ZM-A/")
             ),
             Product(
                 name: "Чехол-коверт Native Union Stow Lite Sleeve 16\", крафтовый",
@@ -61,7 +65,8 @@ class Product {
                 colors: [
                     .brown,
                     .lightGray
-                ]
+                ],
+                link: URL(string: "https://re-store.ru/catalog/STOW-LT-MBS-KFT-16/")
             )
         ]
         return products

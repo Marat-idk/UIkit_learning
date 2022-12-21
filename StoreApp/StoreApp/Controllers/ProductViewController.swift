@@ -119,6 +119,10 @@ class ProductViewController: UIViewController {
         for image in product.images {
             if let image = image {
                 let imageView = getImageView(image: image, rect: imageViewRect)
+                // добавление экшена на тап по imageView
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(productImageTapped(_:)))
+                imageView.addGestureRecognizer(tapGesture)
+                imageView.isUserInteractionEnabled = true
                 productScrollView.addSubview(imageView)
                 imageViewRect.origin.x += view.bounds.size.width
             }
@@ -131,6 +135,12 @@ class ProductViewController: UIViewController {
         imageView.image = image
         imageView.contentMode = .scaleAspectFit
         return imageView
+    }
+    
+    // открытие wkwebview
+    @objc func productImageTapped(_ imageView: UIImageView) {
+        let webVC = WebViewController(link: product.link)
+        self.present(webVC, animated: true, completion: nil)
     }
     
     private func setupButtonStackView() {

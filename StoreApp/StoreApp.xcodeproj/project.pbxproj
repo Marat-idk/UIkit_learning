@@ -21,6 +21,7 @@
 		D2030F502943544500F7E089 /* RecentlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */; };
 		D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */; };
 		D21EAAB2294DCF36002DF113 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB1294DCF36002DF113 /* ProductViewController.swift */; };
+		D21EAAB429513186002DF113 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB329513186002DF113 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionView.swift; sourceTree = "<group>"; };
 		D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		D21EAAB1294DCF36002DF113 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		D21EAAB329513186002DF113 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				D2030F3E294275E900F7E089 /* ForYouViewController.swift */,
 				D2030F402942760500F7E089 /* SearchViewController.swift */,
 				D21EAAB1294DCF36002DF113 /* ProductViewController.swift */,
+				D21EAAB329513186002DF113 /* WebViewController.swift */,
 				D2030F422942763800F7E089 /* CartViewController.swift */,
 			);
 			path = Controllers;
@@ -196,6 +199,7 @@
 				D2030F432942763800F7E089 /* CartViewController.swift in Sources */,
 				D2030F27293E91E700F7E089 /* AppDelegate.swift in Sources */,
 				D2030F3B29426FBE00F7E089 /* MainTabBarController.swift in Sources */,
+				D21EAAB429513186002DF113 /* WebViewController.swift in Sources */,
 				D2030F29293E91E700F7E089 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
