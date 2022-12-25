@@ -16,7 +16,7 @@ class Product {
     var link: URL?
     var isFavorite = false
     
-    init(name: String, images: [UIImage?], price: Double, colors: [UIColor], link: URL?) {
+    init(name: String, images: [UIImage?], price: Double, colors: [UIColor], link: URL? = nil) {
         self.name = name
         self.images = images
         self.price = price
