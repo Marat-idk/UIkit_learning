@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum TabBarMode {
+    case light
+    case dark
+}
+
 class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
@@ -16,7 +21,7 @@ class MainTabBarController: UITabBarController {
         setTabBarAppearance()
     }
     
-    func generateTabBar() {
+    private func generateTabBar() {
         self.viewControllers = [
             generateVC(
                 viewController: BuyViewController(),
@@ -41,14 +46,14 @@ class MainTabBarController: UITabBarController {
         ]
     }
     
-    func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
+    private func generateVC(viewController: UIViewController, title: String, image: UIImage?) -> UIViewController {
         let navVC = UINavigationController(rootViewController: viewController)
         viewController.tabBarItem.title = title
         viewController.tabBarItem.image = image
         return navVC
     }
     
-    func setTabBarAppearance() {
+    private func setTabBarAppearance() {
         tabBar.itemWidth = tabBar.bounds.width / 4
         
         tabBar.itemPositioning = .centered
@@ -59,5 +64,18 @@ class MainTabBarController: UITabBarController {
         
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
+    }
+    
+    func changeTabBarAppearance(to mode: TabBarMode) {
+        switch mode {
+        case .light:
+            tabBar.standardAppearance.backgroundColor = .lightTabBarColor
+            tabBar.standardAppearance.shadowColor = .gray
+            tabBar.scrollEdgeAppearance?.backgroundColor = .lightTabBarColor
+            tabBar.scrollEdgeAppearance?.shadowColor = .gray
+        case .dark:
+            tabBar.standardAppearance.backgroundColor = .darkTabBarColor
+            tabBar.scrollEdgeAppearance?.backgroundColor = .darkTabBarColor
+        }
     }
 }

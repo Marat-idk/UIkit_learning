@@ -28,3 +28,13 @@ extension UIStackView {
         views.forEach { addArrangedSubview($0) }
     }
 }
+
+extension UIColor {
+    static var darkTabBarColor: UIColor {
+        return UIColor(red: 18 / 255, green: 18 / 255, blue: 18 / 255, alpha: 1.0)
+    }
+    
+    static var lightTabBarColor: UIColor {
+        return UIColor(red: 243 / 255, green: 243 / 255, blue: 244 / 255, alpha: 1.0)
+    }
+}

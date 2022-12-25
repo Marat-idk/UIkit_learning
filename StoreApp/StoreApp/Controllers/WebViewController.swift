@@ -14,9 +14,10 @@ class WebViewController: UIViewController {
     
     private let activityIndicatorView: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView()
-        activity.color = .gray
-        activity.style = .medium
         activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.style = .large
+        activity.color = .gray
+        activity.hidesWhenStopped = true
         return activity
     }()
     
@@ -48,7 +49,8 @@ class WebViewController: UIViewController {
         createWebView()
         createToolBar()
         
-        view.addSubviews(activityIndicatorView, toolBar, webView)
+        view.addSubviews(toolBar, webView)
+        webView.addSubview(activityIndicatorView)
         
         if let link = link {
             let urlRequest = URLRequest(url: link)
@@ -64,7 +66,7 @@ class WebViewController: UIViewController {
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
-        //self.view = webView
+//        self.view = webView
     }
     
     // тулбар для вебвью
@@ -81,14 +83,9 @@ class WebViewController: UIViewController {
     
     // констрейнты
     private func setupConstraints() {
-        setupActivityIndicatorViewConstraint()
         setupToolBarConstraint()
         setupWebViewConstraint()
-    }
-    
-    private func setupActivityIndicatorViewConstraint() {
-        activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        setupActivityIndicatorViewConstraint()
     }
     
     private func setupToolBarConstraint() {
@@ -102,6 +99,11 @@ class WebViewController: UIViewController {
         webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: toolBar.topAnchor).isActive = true
+    }
+    
+    private func setupActivityIndicatorViewConstraint() {
+        activityIndicatorView.centerXAnchor.constraint(equalTo: webView.centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: webView.centerYAnchor).isActive = true
     }
     
     @objc private func goBackAction(_ button: UIBarButtonItem) {
@@ -126,7 +128,6 @@ class WebViewController: UIViewController {
             activityIndicatorView.isHidden = false
         } else {
             activityIndicatorView.stopAnimating()
-            activityIndicatorView.isHidden = true
         }
     }
 }
