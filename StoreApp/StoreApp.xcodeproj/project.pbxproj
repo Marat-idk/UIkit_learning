@@ -20,6 +20,7 @@
 		D2030F4929433FEC00F7E089 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4829433FEC00F7E089 /* Product.swift */; };
 		D2030F502943544500F7E089 /* RecentlyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */; };
 		D2030F522943557C00F7E089 /* RecentlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */; };
+		D21423B52958AE880071F470 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21423B42958AE880071F470 /* OrderView.swift */; };
 		D21EAAB2294DCF36002DF113 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB1294DCF36002DF113 /* ProductViewController.swift */; };
 		D21EAAB429513186002DF113 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB329513186002DF113 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		D2030F4829433FEC00F7E089 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionView.swift; sourceTree = "<group>"; };
 		D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		D21423B42958AE880071F470 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		D21EAAB1294DCF36002DF113 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		D21EAAB329513186002DF113 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 			children = (
 				D2030F4F2943544500F7E089 /* RecentlyCollectionView.swift */,
 				D2030F512943557C00F7E089 /* RecentlyCollectionViewCell.swift */,
+				D21423B42958AE880071F470 /* OrderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				D2030F432942763800F7E089 /* CartViewController.swift in Sources */,
 				D2030F27293E91E700F7E089 /* AppDelegate.swift in Sources */,
 				D2030F3B29426FBE00F7E089 /* MainTabBarController.swift in Sources */,
+				D21423B52958AE880071F470 /* OrderView.swift in Sources */,
 				D21EAAB429513186002DF113 /* WebViewController.swift in Sources */,
 				D2030F29293E91E700F7E089 /* SceneDelegate.swift in Sources */,
 			);

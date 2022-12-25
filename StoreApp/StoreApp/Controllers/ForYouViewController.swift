@@ -13,12 +13,11 @@ class ForYouViewController: UIViewController {
     
     private let defaultProfilePhoto = UIImage(systemName: "person.circle.fill")
     
-    private let tableView: UITableView = {
-        let tv = UITableView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.register(UITableViewCell.self, forCellReuseIdentifier: "id")
-        return tv
-    }()
+    private let airpods = Product(
+                                name: "airpods",
+                                images: [UIImage(named: "airpods")],
+                                price: 10000,
+                                colors: [.white])
     
     private lazy var profileButton: UIButton = {
         let btn = UIButton(type: .custom)
@@ -29,6 +28,24 @@ class ForYouViewController: UIViewController {
         btn.addTarget(self, action: #selector(profileButtonTapped(_:)), for: .touchUpInside)
         return btn
     }()
+    
+    private let newsLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Вот что нового"
+        lbl.textColor = .black
+        lbl.font = .boldSystemFont(ofSize: 28)
+        lbl.textAlignment = .left
+        lbl.adjustsFontSizeToFitWidth = true
+        return lbl
+    }()
+    
+    private lazy var orderView: OrderView = {
+        let orderView = OrderView(product: airpods)
+        orderView.translatesAutoresizingMaskIntoConstraints = false
+        return orderView
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +55,8 @@ class ForYouViewController: UIViewController {
         
         setupNavigationController()
         
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate(
-            [
-                tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                tableView.topAnchor.constraint(equalTo: view.topAnchor),
-                tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ]
-        )
-        tableView.dataSource = self
+        
+        view.addSubviews(newsLabel, orderView)
         
         setupConstraints()
     }
@@ -56,14 +65,33 @@ class ForYouViewController: UIViewController {
         navigationController?.overrideUserInterfaceStyle = .light
         navigationItem.title = tabBarItem.title
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.addSubview(profileButton)
+        navigationController?.navigationBar.layoutMargins.left = 15
+        navigationController?.navigationBar.layoutMargins.right = 15
+        
+        let separator = UIView()
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.backgroundColor = .lightGray
+        
+        navigationController?.navigationBar.addSubviews(profileButton)
+        view.addSubview(separator)
+        
+        NSLayoutConstraint.activate(
+            [
+                separator.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                separator.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+                separator.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+                separator.heightAnchor.constraint(equalToConstant: 0.5)
+            ]
+        )
     }
     
     private func setupConstraints() {
         setupProfileButtonConstraints()
+        setupNewsLabelConstraints()
+        setupOrderViewConstraints()
     }
     
-    // MARK: устанавливаю констрейнты для profileButton
+    // MARK: - устанавливаю констрейнты для profileButton
     private func setupProfileButtonConstraints() {
         let targetView = self.navigationController?.navigationBar
         let _ = NSLayoutConstraint(
@@ -73,7 +101,7 @@ class ForYouViewController: UIViewController {
                                                 toItem: targetView,
                                                 attribute: .trailingMargin,
                                                 multiplier: 1.0,
-                                                constant: -16).isActive = true
+                                                constant: -8).isActive = true
         
         let _ = NSLayoutConstraint(
                                                 item: profileButton,
@@ -85,7 +113,20 @@ class ForYouViewController: UIViewController {
                                                 constant: -6).isActive = true
         
         profileButton.widthAnchor.constraint(equalToConstant: view.frame.height * 0.053).isActive = true
-        profileButton.heightAnchor.constraint(equalTo: profileButton.widthAnchor ).isActive = true
+        profileButton.heightAnchor.constraint(equalTo: profileButton.widthAnchor).isActive = true
+    }
+    
+    private func setupNewsLabelConstraints() {
+        newsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        newsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+        newsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+    }
+    
+    private func setupOrderViewConstraints() {
+        orderView.topAnchor.constraint(equalTo: newsLabel.bottomAnchor, constant: 20).isActive = true
+        orderView.leadingAnchor.constraint(equalTo: newsLabel.leadingAnchor).isActive = true
+        orderView.trailingAnchor.constraint(equalTo: newsLabel.trailingAnchor).isActive = true
+        orderView.heightAnchor.constraint(equalToConstant: 180).isActive = true
     }
     
     private func getProfileImage() -> UIImage? {
@@ -140,24 +181,6 @@ class ForYouViewController: UIViewController {
         super.viewWillDisappear(animated)
         guard let tabbarVC = tabBarController as? MainTabBarController else { return }
         tabbarVC.changeTabBarAppearance(to: .dark)
-    }
-}
-
-extension ForYouViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "id", for: indexPath)
-        
-        cell.textLabel?.text = "row \(indexPath.row)"
-        
-        return cell
     }
 }
 
