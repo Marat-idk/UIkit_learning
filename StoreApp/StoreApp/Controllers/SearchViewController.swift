@@ -18,6 +18,20 @@ class SearchViewController: UIViewController {
     // nil - значит результаты поиска будут в текущем VC
     private let searchController = UISearchController(searchResultsController: nil)
     
+    private let scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        sv.showsVerticalScrollIndicator = false
+        sv.showsHorizontalScrollIndicator = false
+        return sv
+    }()
+    
+    private let contentView: UIView = {
+        let vw = UIView()
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        return vw
+    }()
+    
     private let recentlyWatchedLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +75,11 @@ class SearchViewController: UIViewController {
         setupSearchController()
         setupStackView()
         
-        view.addSubviews(recentlyWatchedLabel, recentlyClearButton,
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubviews(recentlyWatchedLabel, recentlyClearButton,
                          recentlyWatchedCollView, recentlyRequestsLabel, recentlyRequestsStackView)
         setupConstraints()
         
@@ -92,7 +110,7 @@ class SearchViewController: UIViewController {
         recentlyRequestsStackView.distribution = .fillEqually
         recentlyRequestsStackView.spacing = 15
         
-        let searches = ["AirPods", "AppleCare", "Beats", "Сравните моделей iPhone"]
+        let searches = ["AirPods", "AppleCare", "Beats", "Сравните модели iPhone"]
         for i in 0...3 {
             let button = UIButton()
             button.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
@@ -108,6 +126,8 @@ class SearchViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        setupScrollViewConstraints()
+        setupContentViewConstraints()
         setupRWLabelConstraints()
         setupRecentlyClearButtonConstraints()
         setupRecentlyWatchedCollConstraints()
@@ -115,21 +135,38 @@ class SearchViewController: UIViewController {
         setupRecentlyRequestStackView()
     }
     
+    private func setupScrollViewConstraints() {
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    }
+    
+    private func setupContentViewConstraints() {
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+    }
+    
     private func setupRWLabelConstraints() {
-        recentlyWatchedLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        recentlyWatchedLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        recentlyWatchedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true
+        recentlyWatchedLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         recentlyWatchedLabel.trailingAnchor.constraint(lessThanOrEqualTo: recentlyClearButton.leadingAnchor).isActive = true
     }
     
     private func setupRecentlyClearButtonConstraints() {
         recentlyClearButton.centerYAnchor.constraint(equalTo: recentlyWatchedLabel.centerYAnchor).isActive = true
-        recentlyClearButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        recentlyClearButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
         recentlyClearButton.widthAnchor.constraint(equalToConstant: 90).isActive = true
     }
     
     private func setupRecentlyWatchedCollConstraints() {
-        recentlyWatchedCollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        recentlyWatchedCollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        recentlyWatchedCollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        recentlyWatchedCollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         recentlyWatchedCollView.topAnchor.constraint(equalTo: recentlyWatchedLabel.bottomAnchor, constant: 20).isActive = true
         recentlyWatchedCollView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.22).isActive = true
     }
@@ -144,7 +181,7 @@ class SearchViewController: UIViewController {
         recentlyRequestsStackView.topAnchor.constraint(equalTo: recentlyRequestsLabel.bottomAnchor, constant: 20).isActive = true
         recentlyRequestsStackView.leadingAnchor.constraint(equalTo: recentlyRequestsLabel.leadingAnchor).isActive = true
         recentlyRequestsStackView.trailingAnchor.constraint(equalTo: recentlyRequestsLabel.trailingAnchor).isActive = true
-        recentlyRequestsStackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//        recentlyRequestsStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
 
