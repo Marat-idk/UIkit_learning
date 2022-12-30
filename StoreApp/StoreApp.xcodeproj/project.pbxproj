@@ -23,6 +23,7 @@
 		D21423B52958AE880071F470 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21423B42958AE880071F470 /* OrderView.swift */; };
 		D21EAAB2294DCF36002DF113 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB1294DCF36002DF113 /* ProductViewController.swift */; };
 		D21EAAB429513186002DF113 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21EAAB329513186002DF113 /* WebViewController.swift */; };
+		D2ED28AF295E42BC0051BEEB /* StartPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28AE295E42BC0051BEEB /* StartPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D21423B42958AE880071F470 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		D21EAAB1294DCF36002DF113 /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		D21EAAB329513186002DF113 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		D2ED28AE295E42BC0051BEEB /* StartPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		D2030F4429427E8300F7E089 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D2ED28AE295E42BC0051BEEB /* StartPageViewController.swift */,
 				D2030F3A29426FBE00F7E089 /* MainTabBarController.swift */,
 				D2030F3C294275A600F7E089 /* BuyViewController.swift */,
 				D2030F3E294275E900F7E089 /* ForYouViewController.swift */,
@@ -201,6 +204,7 @@
 				D2030F46294283DA00F7E089 /* UIExtensions.swift in Sources */,
 				D2030F432942763800F7E089 /* CartViewController.swift in Sources */,
 				D2030F27293E91E700F7E089 /* AppDelegate.swift in Sources */,
+				D2ED28AF295E42BC0051BEEB /* StartPageViewController.swift in Sources */,
 				D2030F3B29426FBE00F7E089 /* MainTabBarController.swift in Sources */,
 				D21423B52958AE880071F470 /* OrderView.swift in Sources */,
 				D21EAAB429513186002DF113 /* WebViewController.swift in Sources */,

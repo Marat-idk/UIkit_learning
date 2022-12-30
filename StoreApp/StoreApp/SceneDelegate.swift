@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.overrideUserInterfaceStyle = .dark
-        window?.rootViewController = MainTabBarController()
+        window?.rootViewController = StartPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        //window?.rootViewController = MainTabBarController()
         window?.makeKeyAndVisible()
     }
 
