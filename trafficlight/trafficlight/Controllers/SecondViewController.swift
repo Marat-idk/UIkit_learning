@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Auto-layout by NSLayoutConstraint
 class SecondViewController: UIViewController {
 
     let blackView = ColoredView(with: .black)

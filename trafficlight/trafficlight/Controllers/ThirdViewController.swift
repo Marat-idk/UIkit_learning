@@ -7,18 +7,30 @@
 
 import UIKit
 
+// Auto-layout by NSLayoutAnchor
 class ThirdViewController: UIViewController {
     
     let blackView = ColoredView(with: .black)
     let redView = ColoredView(with: .red)
     let yellowView = ColoredView(with: .yellow)
     let greenView = ColoredView(with: .green)
+    
+    let nextButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("Next", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(.lightGray, for: .highlighted)
+        btn.titleLabel?.font = .systemFont(ofSize: 20)
+        btn.backgroundColor = .black
+        btn.addTarget(self, action: #selector(nextButtonTapped(_:)), for: .touchUpInside)
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
-        view.addSubview(blackView)
+        view.addSubviews(blackView, nextButton)
         blackView.addSubviews(redView, yellowView, greenView)
         setupConstraints()
     }
@@ -28,6 +40,7 @@ class ThirdViewController: UIViewController {
         setupYellowConstraints()
         setupGreenConstraints()
         setupBlackConstraints()
+        setupNextButtonConstraints()
     }
     
     private func setupRedConstraints() {
@@ -66,4 +79,17 @@ class ThirdViewController: UIViewController {
         blackView.widthAnchor.constraint(equalTo: yellowView.widthAnchor, multiplier: 1.5).isActive = true
     }
 
+    private func setupNextButtonConstraints() {
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        nextButton.centerYAnchor.constraint(equalTo: blackView.centerYAnchor).isActive = true
+        nextButton.leadingAnchor.constraint(equalTo: blackView.trailingAnchor, constant: 10).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    @objc private func nextButtonTapped(_ sender: UIButton) {
+        let vc = FourthViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

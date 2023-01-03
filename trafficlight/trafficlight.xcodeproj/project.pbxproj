@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8611F3E23B00566FAC24610B /* Pods_trafficlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BC09B1BF560C7718ABCB07D /* Pods_trafficlight.framework */; };
 		D2ED28BD29609A950051BEEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28BC29609A950051BEEB /* AppDelegate.swift */; };
 		D2ED28BF29609A950051BEEB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28BE29609A950051BEEB /* SceneDelegate.swift */; };
 		D2ED28C129609A950051BEEB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28C029609A950051BEEB /* FirstViewController.swift */; };
@@ -17,9 +18,13 @@
 		D2ED28D6296279A20051BEEB /* ColoredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28D5296279A20051BEEB /* ColoredView.swift */; };
 		D2ED28D829627A8D0051BEEB /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28D729627A8D0051BEEB /* UIExtensions.swift */; };
 		D2ED28DA2962FE800051BEEB /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28D92962FE800051BEEB /* ThirdViewController.swift */; };
+		D2ED28DC2963921D0051BEEB /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED28DB2963921C0051BEEB /* FourthViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BC09B1BF560C7718ABCB07D /* Pods_trafficlight.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_trafficlight.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51AC9E33F5C2F60C6F74BDE9 /* Pods-trafficlight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trafficlight.release.xcconfig"; path = "Target Support Files/Pods-trafficlight/Pods-trafficlight.release.xcconfig"; sourceTree = "<group>"; };
+		723A25F784FE179D998B5B89 /* Pods-trafficlight.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-trafficlight.debug.xcconfig"; path = "Target Support Files/Pods-trafficlight/Pods-trafficlight.debug.xcconfig"; sourceTree = "<group>"; };
 		D2ED28B929609A950051BEEB /* trafficlight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = trafficlight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2ED28BC29609A950051BEEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2ED28BE29609A950051BEEB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +37,7 @@
 		D2ED28D5296279A20051BEEB /* ColoredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredView.swift; sourceTree = "<group>"; };
 		D2ED28D729627A8D0051BEEB /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		D2ED28D92962FE800051BEEB /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		D2ED28DB2963921C0051BEEB /* FourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8611F3E23B00566FAC24610B /* Pods_trafficlight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +57,8 @@
 			children = (
 				D2ED28BB29609A950051BEEB /* trafficlight */,
 				D2ED28BA29609A950051BEEB /* Products */,
+				F113213AF89C324E270D59FB /* Pods */,
+				D72C4F2864BA5DE326FE2A09 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +92,7 @@
 				D2ED28C029609A950051BEEB /* FirstViewController.swift */,
 				D2ED28D0296258440051BEEB /* SecondViewController.swift */,
 				D2ED28D92962FE800051BEEB /* ThirdViewController.swift */,
+				D2ED28DB2963921C0051BEEB /* FourthViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -95,6 +105,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D72C4F2864BA5DE326FE2A09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1BC09B1BF560C7718ABCB07D /* Pods_trafficlight.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F113213AF89C324E270D59FB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				723A25F784FE179D998B5B89 /* Pods-trafficlight.debug.xcconfig */,
+				51AC9E33F5C2F60C6F74BDE9 /* Pods-trafficlight.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -102,9 +129,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2ED28CD29609A9D0051BEEB /* Build configuration list for PBXNativeTarget "trafficlight" */;
 			buildPhases = (
+				3615F0D6A1CEAA7E6D4BA525 /* [CP] Check Pods Manifest.lock */,
 				D2ED28B529609A950051BEEB /* Sources */,
 				D2ED28B629609A950051BEEB /* Frameworks */,
 				D2ED28B729609A950051BEEB /* Resources */,
+				97E86B6B40D5CB10A9B535F6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +190,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3615F0D6A1CEAA7E6D4BA525 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-trafficlight-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97E86B6B40D5CB10A9B535F6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-trafficlight/Pods-trafficlight-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-trafficlight/Pods-trafficlight-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-trafficlight/Pods-trafficlight-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D2ED28B529609A950051BEEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -170,6 +241,7 @@
 				D2ED28C129609A950051BEEB /* FirstViewController.swift in Sources */,
 				D2ED28BD29609A950051BEEB /* AppDelegate.swift in Sources */,
 				D2ED28DA2962FE800051BEEB /* ThirdViewController.swift in Sources */,
+				D2ED28DC2963921D0051BEEB /* FourthViewController.swift in Sources */,
 				D2ED28D829627A8D0051BEEB /* UIExtensions.swift in Sources */,
 				D2ED28BF29609A950051BEEB /* SceneDelegate.swift in Sources */,
 				D2ED28D6296279A20051BEEB /* ColoredView.swift in Sources */,
@@ -316,6 +388,7 @@
 		};
 		D2ED28CE29609A9D0051BEEB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 723A25F784FE179D998B5B89 /* Pods-trafficlight.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -344,6 +417,7 @@
 		};
 		D2ED28CF29609A9D0051BEEB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 51AC9E33F5C2F60C6F74BDE9 /* Pods-trafficlight.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

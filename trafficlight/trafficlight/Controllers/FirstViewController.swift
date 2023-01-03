@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Auto-layout in storyboard
 class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
